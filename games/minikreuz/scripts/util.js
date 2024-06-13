@@ -1,3 +1,23 @@
+function createInput(tileNumber, letter) {
+	let tile = document.getElementById("tile" + tileNumber.toString());
+	tile.classList.remove("none");
+
+	tile.innerHTML = "";
+
+	let tileLetter = document.createElement("input");
+	tileLetter.id = "tileLetter" + tileNumber.toString();
+	tileLetter.setAttribute("maxLength", 1);
+	tileLetter.setAttribute("tileNumber", tileNumber.toString());
+	tileLetter.setAttribute("letter", letter);
+	tileLetter.setAttribute("autocomplete", "off");
+	tileLetter.setAttribute("readonly", "readonly");
+	tileLetter.setAttribute("inputmode", "none");
+
+	tileLetter.value = "";
+
+	tile.appendChild(tileLetter);
+}
+
 function moveTile(tileNumber, word, direction) {
 	// handle skipping to next input
 	let x = tileNumber % data.puzzle.size.x;

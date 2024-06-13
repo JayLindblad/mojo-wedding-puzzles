@@ -36,24 +36,7 @@ function populateGrid() {
 		// Set letters
 		for (const [index, letter] of word.word.split("").entries()) {
 			let tileNumber = word.y * data.puzzle.size.y + (word.x + index);
-
-			let tile = document.getElementById("tile" + tileNumber.toString());
-			tile.classList.remove("none");
-
-			tile.innerHTML = "";
-
-			let tileLetter = document.createElement("input");
-			tileLetter.id = "tileLetter" + tileNumber.toString();
-			tileLetter.setAttribute("maxLength", 1);
-			tileLetter.setAttribute("tileNumber", tileNumber.toString());
-			tileLetter.setAttribute("letter", letter);
-			tileLetter.setAttribute("autocomplete", "off");
-			tileLetter.setAttribute("readonly", "readonly");
-			tileLetter.setAttribute("inputmode", "none");
-
-			tileLetter.value = "";
-
-			tile.appendChild(tileLetter);
+			createInput(tileNumber, letter);
 		};
 	};
 
@@ -61,15 +44,100 @@ function populateGrid() {
 		// Set letters
 		for (const [index, letter] of word.word.split("").entries()) {
 			let tileNumber = (word.y + index) * data.puzzle.size.x + word.x;
-
-			let tile = document.getElementById("tile" + tileNumber.toString());
-			tile.classList.remove("none");
+			createInput(tileNumber, letter);
 		};
 	};
 };
 
 async function initialisePuzzle() {
-	data = await puzzleLoadEvent();
+	//data = await puzzleLoadEvent();
+	data = {
+		"puzzle": {
+			"horizontal": [
+				{
+					"word": "sad",
+					"y": 0,
+					"n": 1,
+					"clue": "In need of some cheering up",
+					"x": 1
+				},
+				{
+					"y": 1,
+					"x": 0,
+					"n": 4,
+					"word": "paris",
+					"clue": "City that holds an annual 'Grand Prix de la baguette' contest"
+				},
+				{
+					"word": "ju",
+					"y": 2,
+					"n": 6,
+					"x": 0,
+					"clue": "Battery life, colloquially"
+				},
+				{
+					"word": "steer",
+					"n": 7,
+					"clue": "Take the wheel",
+					"x": 0,
+					"y": 3
+				},
+				{
+					"y": 4,
+					"word": "ess",
+					"n": 8,
+					"x": 1,
+					"clue": "Twice-curved letter"
+				}
+			],
+			"size": {
+				"y": 5,
+				"x": 5
+			},
+			"vertical": [
+				{
+					"n": 4,
+					"word": "pjs",
+					"y": 1,
+					"x": 0,
+					"clue": "Attire you might wear while working from home, for short"
+				},
+				{
+					"y": 0,
+					"word": "saute",
+					"clue": "Pan fry",
+					"x": 1,
+					"n": 1
+				},
+				{
+					"n": 2,
+					"word": "ar",
+					"x": 2,
+					"y": 0,
+					"clue": "Ram in the zodiac"
+				},
+				{
+					"clue": "Cuts into small cubes",
+					"n": 3,
+					"y": 0,
+					"x": 3,
+					"word": "dices"
+				},
+				{
+					"x": 4,
+					"n": 5,
+					"y": 1,
+					"word": "ser",
+					"clue": "Spanish verb meaning 'to be'"
+				}
+			]
+		},
+		"metadata": {
+			"author": "Niklas",
+			"timestamp": 1718151360078,
+			"id": "5COMJWr3dvjPvfUmuGbS"
+		}
+	}
 
 	// initialise game
 	initialiseGrid();
