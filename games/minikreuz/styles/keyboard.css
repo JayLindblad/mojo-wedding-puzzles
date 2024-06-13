@@ -1,0 +1,67 @@
+.keyboard {
+	display: none;
+
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: space-evenly;
+
+	width: 95%;
+	height: 50%;
+
+	background-color: #f1f1f1;
+
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 2.5%;
+	padding-right: 2.5%;
+}
+
+@media (pointer:none), (pointer:coarse) {
+	.keyboard {
+		display: flex;
+	}
+}
+
+.keyboard-row {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	flex-grow: 1;
+	min-width: 0;
+
+	justify-content: space-between;
+
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.keyboard-button {
+	font-weight: 500;
+	font-size: 24px;
+
+	border-radius: 5px;
+
+	margin-left: 0.5vw;
+	margin-right: 0.5vw;
+
+	padding-top: 3px;
+	padding-bottom: 3px;
+
+	height: 35px;
+	width: 100%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	box-shadow: 0 0 3px -1px rgba(0,0,0,.3);
+	cursor: pointer;
+}
+
+.keyboard-letter {
+	background-color: white;
+}
+
+.keyboard-symbol {
+	background-color: gainsboro;
+}

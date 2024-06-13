@@ -1,0 +1,25 @@
+:root {
+	--bg-color: white;
+	--title-bg: white;
+
+	--text: black;
+	--text-secondary: rgb(86, 86, 86);
+
+	--secondary: #ededed;
+}
+
+html, body, .all {
+	width: 100%;
+	height: 100%;
+
+	margin: 0;
+
+	font-family: Franklin, 'Arial Narrow', Arial, sans-serif;
+	font-size: 18px;
+}
+
+.container {
+	width: 95%;
+
+	margin: auto;
+}

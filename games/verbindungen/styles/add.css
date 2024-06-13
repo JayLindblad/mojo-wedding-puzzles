@@ -1,0 +1,26 @@
+#straightforward {
+	background-color: rgb(249, 223, 109);
+}
+
+#medium {
+	background-color: rgb(160, 195, 90);
+}
+
+#hard {
+	background-color: rgb(176, 196, 239);
+}
+
+#tricky {
+	background-color: rgb(186, 129, 197);
+}
+
+.category input {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.words {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}

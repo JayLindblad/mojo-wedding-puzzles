@@ -1,0 +1,47 @@
+@media (pointer:none), (pointer:coarse) {
+	@media (min-width: 450px) and (max-height: 900px) {
+		.title #infos, .title #back {
+			display: none;
+		}
+	
+		.title, .title-bar {
+			padding: 3px;
+			margin: 0px;
+		}
+	
+		.buttons {
+			margin: 4px;
+		}
+	}
+	@media (max-width: 450px) and (max-height: 850px) {
+		.title #infos, .title #back {
+			display: none;
+		}
+	
+		.title, .title-bar {
+			padding: 3px;
+			margin: 0px;
+		}
+	
+		.buttons {
+			margin: 4px;
+		}
+	}
+
+	.mobile-bottom {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
+	.clue-container {
+		margin-top: 0;
+		margin-bottom: 0;
+		border-radius: 0;
+	}
+
+	.clue-container div {
+		margin: 5px;
+	}
+}

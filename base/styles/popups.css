@@ -1,0 +1,84 @@
+.popup{
+	position: absolute;
+	top: 5%;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+
+	border-radius: 10px;
+	transform: scale(0.1);
+
+	visibility: hidden;
+	transition: all 0.4s ease-in-out;
+}
+
+.popup-open{
+	visibility: visible;
+	transform: scale(1);
+	opacity: 100% !important;
+}
+
+.results {
+	opacity: 0%;
+
+	font-size: 16px;
+
+	background: var(--bg-color);
+	color: var(--text);
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	padding: 30px;
+	width: 60%;
+}
+
+.copy {
+	margin-top: 20px;
+}
+
+.instructions-popup {
+	opacity: 0%;
+
+	font-size: 16px;
+
+	background: var(--bg-color);
+	color: var(--text);
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	padding: 10px;
+	width: 90%;
+}
+
+.instructions-popup div {
+	margin-top: 5px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    color: red;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.close:hover {
+    color: darkred;
+}
+
+.blurred {
+	filter: blur(2px)
+}

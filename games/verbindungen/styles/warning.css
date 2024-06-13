@@ -1,0 +1,13 @@
+.warning {
+	background: #4e4e4e;
+	padding: 10px;
+	opacity: 90% !important;
+
+	font-size: 30px;
+
+	text-align: center;
+	color: white;
+
+	padding: 30px;
+	width: 40%;
+}

@@ -1,0 +1,33 @@
+---
+layout: default.html
+---
+
+<link rel="stylesheet" href="/assets/styles/play.css">
+
+<script src="/assets/scripts/db.js"></script>
+<script src="/assets/scripts/popups.js"></script>
+<script src="/assets/scripts/play.js"></script>
+<script src="/assets/scripts/navigate.js"></script>
+
+<div class="game-container">
+	<div class="to-blur">
+		{- content -}
+	</div>
+
+	<div id="instructions" class="popup instructions-popup">
+		<div class="close" onclick="closePopup('instructions');">X</div>
+			
+		{! how.html !}
+	</div>
+	
+	<div id="results" class="results popup">
+		<div class="close" onclick="closePopup('results');">X</div>
+		<div>
+			<h2>Dein Ergebnis</h2>
+		</div>
+		<div id="results-inner" class="results-inner">
+			{! results.html !}
+		</div>
+		<div class="copy button" id="copy" onclick="copyResults()">Teile dein Ergebnis!</div>
+	</div>
+</div>

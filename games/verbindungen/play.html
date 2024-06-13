@@ -1,0 +1,55 @@
+---
+layout: play.html
+title: Verbindungen: Das Spiel
+description: Spiele Verbindungen, die deutsche Version des NYT Spiels Connections!
+---
+
+<link rel="stylesheet" href="/assets/verbindungen/styles/index.css">
+<link rel="stylesheet" href="/assets/verbindungen/styles/animations.css">
+<link rel="stylesheet" href="/assets/verbindungen/styles/grid.css">
+<link rel="stylesheet" href="/assets/verbindungen/styles/mistakes.css">
+<link rel="stylesheet" href="/assets/verbindungen/styles/results.css">
+<link rel="stylesheet" href="/assets/verbindungen/styles/warning.css">
+
+<div class="grid">
+	<div class="row" id="row1">
+		<div class="tile" id="1" onclick="clickTile(1)">&nbsp;</div>
+		<div class="tile" id="2" onclick="clickTile(2)">&nbsp;</div>
+		<div class="tile" id="3" onclick="clickTile(3)">&nbsp;</div>
+		<div class="tile" id="4" onclick="clickTile(4)">&nbsp;</div>
+	</div>
+	<div class="row" id="row2">
+		<div class="tile" id="5" onclick="clickTile(5)">&nbsp;</div>
+		<div class="tile" id="6" onclick="clickTile(6)">&nbsp;</div>
+		<div class="tile" id="7" onclick="clickTile(7)">&nbsp;</div>
+		<div class="tile" id="8" onclick="clickTile(8)">&nbsp;</div>
+	</div>
+	<div class="row" id="row3">
+		<div class="tile" id="9" onclick="clickTile(9)">&nbsp;</div>
+		<div class="tile" id="10" onclick="clickTile(10)">&nbsp;</div>
+		<div class="tile" id="11" onclick="clickTile(11)">&nbsp;</div>
+		<div class="tile" id="12" onclick="clickTile(12)">&nbsp;</div>
+	</div>
+	<div class="row" id="row4">
+		<div class="tile" id="13" onclick="clickTile(13)">&nbsp;</div>
+		<div class="tile" id="14" onclick="clickTile(14)">&nbsp;</div>
+		<div class="tile" id="15" onclick="clickTile(15)">&nbsp;</div>
+		<div class="tile" id="16" onclick="clickTile(16)">&nbsp;</div>
+	</div>
+</div>
+<div class="mistake-counter" id="mistake-container">
+	<div>Verbleibende Versuche: </div>
+	<div class="mistakes" id="mistakes"></div>
+</div>
+<div class="buttons" id="buttons">
+	<div class="button" id="share" onclick="copyTextToClipboard(window.location.href);">Puzzle Teilen</div>
+	<div class="shuffle button" id="shuffle" onclick="shuffleWords();">Mischen</div>
+	<div class="submit button" id="submit">Probieren</div>
+</div>
+
+<div id="warning" class="warning popup">
+</div>
+
+<script src="/assets/verbindungen/scripts/util.js"></script>
+<script src="/assets/verbindungen/scripts/events.js"></script>
+<script src="/assets/verbindungen/scripts/index.js"></script>

@@ -1,0 +1,22 @@
+---
+layout: modify.html
+---
+
+<link rel="stylesheet" href="/assets/styles/add.css">
+
+<div class="add-container">
+	<div class='author'>
+		<input id="author" placeholder="Autor...">
+	</div>
+
+	{- content -}
+
+	<div class="buttons" id="buttons">
+		<div onclick="addPuzzle()" class="submit button" id="send">Einsenden</div>
+		<div id="signedin"></div>
+	</div>
+</div>
+
+<script src="/assets/scripts/db.js"></script>
+<script src="/assets/scripts/auth.js"></script>
+<script src="/assets/scripts/add.js"></script>

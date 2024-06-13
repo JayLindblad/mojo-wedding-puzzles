@@ -1,0 +1,28 @@
+<div class="title to-blur">
+	<div id="back">
+		<span class="underline"><a href="/">📍 Zurück zu allen Spielen</a></span>
+	</div>
+	<div class="title-bar">
+		<div id="infos" class="navigate-container">
+			<div>
+				<span class="name"><a href="/{{ slug }}/play.html">{{ name }}</a></span>
+			</div>
+
+			<div>
+				<span class="date" id="date"></span>
+				<span class="author" id="author"></span>
+			</div>
+		</div>
+		<div id="nav" class="navigate-container">
+			<div>
+				<span onclick="backwards('{{ slug }}')" class="navigate" id="backwards">⬅️</span>
+				<span class="navigate" id="overview"><a href="./all.html">Alle Puzzle</a></span>
+				<span onclick="forwards('{{ slug }}')" class="navigate" id="forwards">➡️</span>
+			</div>
+
+			<div>
+				<button class="button" onclick="showPopup('instructions')" class="instructions" id="">Wie spielt man?</button>
+			</div>
+		</div>
+	</div>
+</div>

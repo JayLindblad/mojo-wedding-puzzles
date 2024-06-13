@@ -1,0 +1,51 @@
+---
+layout: play.html
+title: Mini Kreuzworträtsel: Das Spiel
+description: Spiele Mini Kreuzworträtsel, die deutsche Version des NYT Spiels Mini Crossword!
+---
+
+<link rel="stylesheet" href="/assets/minikreuz/styles/index.css">
+<link rel="stylesheet" href="/assets/minikreuz/styles/grid.css">
+<link rel="stylesheet" href="/assets/minikreuz/styles/clue.css">
+<link rel="stylesheet" href="/assets/minikreuz/styles/warning.css">
+<link rel="stylesheet" href="/assets/minikreuz/styles/mobile-bottom.css">
+
+<div class="to-blur">
+	<div id="buttons" class="buttons">
+		<div class="button timer" id="timer">
+			Timer: 0:00
+		</div>
+		<div class="shuffle button" id="shuffle" onclick="reset();">Zurücksetzen</div>
+	</div>
+
+	<div id="grid" class="grid">
+	</div>
+
+	<div class="mobile-bottom">
+		<div id="" class="clue-container">
+			<div class="clue-navigate" onclick="backward()"><</div>
+			<div class="clue" id="clue"></div>
+			<div class="clue-navigate" onclick="forward()">></div>
+		</div>
+		
+		<div>
+			{% ./games/minikreuz/keyboard.html %}
+		</div>
+	</div>
+</div>
+
+<div id="completed" class="completed popup warning">
+	<div class="close" onclick="closePopup('completed');">X</div>
+	<div>
+		<h2>Das Puzzle ist ausgefüllt, aber falsch!</h2>
+		Schließe das Fenster und versuche es weiter.
+	</div>
+</div>
+
+<script src="/assets/minikreuz/scripts/util.js"></script>
+<script src="/assets/minikreuz/scripts/navigation.js"></script>
+<script src="/assets/minikreuz/scripts/inputs.js"></script>
+<script src="/assets/minikreuz/scripts/events.js"></script>
+<script src="/assets/minikreuz/scripts/storage.js"></script>
+<script src="/assets/minikreuz/scripts/results.js"></script>
+<script src="/assets/minikreuz/scripts/index.js"></script>

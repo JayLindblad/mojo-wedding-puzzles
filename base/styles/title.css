@@ -1,0 +1,45 @@
+.title {
+	padding: 20px;
+
+	margin-bottom: 20px;
+
+	background-color: var(--title-bg);
+	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.22);
+}
+
+.title-bar {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+
+	margin-top: 10px;
+}
+
+.name {
+	font-size: 25px;
+	font-weight: 700;
+	font-family: Karnak, 'Arial Narrow', Arial, sans-serif;
+}
+
+.number, .date {
+	font-weight: 400;
+	font-family: Karnak, 'Arial Narrow', Arial, sans-serif;
+}
+
+.navigate-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	column-gap: 10px;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.navigate {
+	cursor: pointer;
+}
+
+.underline {
+	text-decoration: underline;
+}

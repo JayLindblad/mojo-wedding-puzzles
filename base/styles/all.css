@@ -1,0 +1,46 @@
+.puzzle-list {
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	width: 80%;
+}
+
+.puzzle-list .item {
+	margin: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.puzzle-list .item span {
+	margin-right: 10px;
+	flex: 1;
+}
+
+.puzzle-list .item .bold {
+	margin-right: 10px;
+	font-weight: bold;
+}
+
+.trash-button {
+	background-color: #e74c3c;
+	border: none;
+	padding: 5px;
+	border-radius: 2px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.trash-button:hover {
+	background-color: #c0392b;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.trash-button svg {
+	width: 10px;
+	height: 10px;
+	fill: white;
+}

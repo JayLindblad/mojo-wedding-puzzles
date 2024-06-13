@@ -1,0 +1,27 @@
+.mistake-counter {
+	margin-top: 3vw;
+	width: 100%;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+
+	font-size: 15px;
+	font-weight: 300;
+}
+
+.mistakes {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.mistake {
+	background-color: #4e4e4e;
+	margin: 5px;
+	border-radius: 50%;
+
+	width: 20px;
+	height: 20px;
+}
