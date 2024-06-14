@@ -20,10 +20,10 @@ function getPuzzles() {
 }
 
 function deletePuzzle(id) {
-	db.collection(game).doc(id).delete();
-
-	window.location.reload();
-}
+	db.collection(game).doc(id).delete().then(() => {
+		window.location.reload();
+	});
+};
 
 function setupList() {
 	let list = document.getElementById("puzzle-list");
