@@ -2,7 +2,11 @@ function createInput(tileNumber, letter) {
 	let tile = document.getElementById("tile" + tileNumber.toString());
 	tile.classList.remove("none");
 
-	tile.innerHTML = "";
+	for (let cN of tile.childNodes) {
+		if (cN.nodeName == "INPUT") {
+			cN.remove();
+		};
+	};
 
 	let tileLetter = document.createElement("input");
 	tileLetter.id = "tileLetter" + tileNumber.toString();
