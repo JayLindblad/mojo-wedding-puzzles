@@ -13,6 +13,37 @@ let data = {
 let previousSelected = -1;
 let selectOrientation = "horizontal";
 
+function loadLetters() {
+	let stored = localStorage.getItem(data.metadata.id);
+
+	if (stored != null) {
+		stored = JSON.parse(stored);
+
+		for (const [key, value] of Object.entries(stored)) {
+			if (value == ".") {
+				document.getElementById("tile" + key.substring(10).toString()).classList.add("none");
+			} else {
+				document.getElementById(key).value = value;
+			};
+		};
+	};
+};
+
+function saveLetters() {
+	let stored = {};
+
+	let inputs = document.querySelectorAll(".grid input");
+	[].forEach.call(inputs, function(el) {
+		if (document.getElementById("tile" + el.id.substring(10).toString()).classList.contains("none")) {
+			stored[el.id] = ".";
+		} else {
+			stored[el.id] = el.value;
+		};
+	});
+
+	localStorage.setItem(data.metadata.id, JSON.stringify(stored));
+};
+
 function populateGrid() {
 	for (let y = 0; y < data.puzzle.size.y; y++) {
 		for (let x = 0; x < data.puzzle.size.x; x++) {
