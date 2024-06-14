@@ -13,7 +13,7 @@ function loadLetters() {
 function saveLetters() {
 	let stored = {};
 
-	let inputs = document.querySelectorAll("input");
+	let inputs = document.querySelectorAll(".grid input");
 	[].forEach.call(inputs, function(el) {
 		stored[el.id] = el.value;
 	});

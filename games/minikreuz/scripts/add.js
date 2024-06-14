@@ -1,4 +1,7 @@
 let data = {
+	metadata: {
+		id: "add"
+	},
 	puzzle: {
 		size: {
 			x: 5,
@@ -152,6 +155,8 @@ function onTileInput(event) {
 				tile.classList.toggle("none");
 			};
 
+			createClues();
+			saveLetters();
 			nextTile();
 			return;
 	};
@@ -250,6 +255,9 @@ function initialisePuzzle() {
 	createGrid();
 	populateGrid();
 
+	loadLetters();
+	createClues();
+
 	const inputs = document.querySelectorAll('.grid input');
 	inputs.forEach(input => {
 		input.addEventListener('click', onTileClick);
@@ -293,14 +301,21 @@ function parsePuzzle() {
 		// Get letters of word
 		for (let j = y; j < data.puzzle.size.y; j++) {
 			let tileNumber = x + j * data.puzzle.size.y;
+			let tileLetter = document.getElementById("tileLetter" + tileNumber.toString());
+
 			// on none tile, stop and add word
 			if (document.getElementById("tile" + tileNumber.toString()).classList.contains("none")) {
 				break;
 			};
 
+			// if square is empty break and set word to null
+			if (tileLetter.value == "") {
+				word = "";
+				break;
+			};
+
 			// get letter of current tile and add to word
-			let tileLetter = document.getElementById("tileLetter" + tileNumber.toString()).value;
-			word += tileLetter;
+			word += tileLetter.value;
 		};
 
 		if (word.length > 1) {
@@ -342,14 +357,21 @@ function parsePuzzle() {
 		// Get letters of word
 		for (let j = x; j < data.puzzle.size.x; j++) {
 			let tileNumber = j + y * data.puzzle.size.y;
+			let tileLetter = document.getElementById("tileLetter" + tileNumber.toString());
+
 			// on none tile, stop and add word
 			if (document.getElementById("tile" + tileNumber.toString()).classList.contains("none")) {
 				break;
 			};
 
+			// if square is empty break and set word to null
+			if (tileLetter.value == "") {
+				word = "";
+				break;
+			};
+
 			// get letter of current tile and add to word
-			let tileLetter = document.getElementById("tileLetter" + tileNumber.toString()).value;
-			word += tileLetter;
+			word += tileLetter.value;
 		};
 
 		if (word.length > 1) {
@@ -380,6 +402,64 @@ function parsePuzzle() {
 	return puzzle;
 };
 
+function createClue(w, direction, list) {
+	let clue = document.createElement("div");
+	clue.classList.add("clue-add");
+
+	let number = document.createElement("div");
+	number.innerHTML = w.n.toString() + ".";
+	number.classList.add("clue-number")
+
+	let word = document.createElement("div");
+	word.innerHTML = w.word.toUpperCase();
+	
+	let clueText = document.createElement("div");
+	clueText.classList.add("input")
+	let clueInput = document.createElement("input");
+	clueInput.setAttribute("direction", direction)
+	clueInput.setAttribute("number", w.n.toString());
+	clueText.appendChild(clueInput);
+
+	clue.appendChild(number);
+	clue.appendChild(word);
+	clue.appendChild(clueText);
+
+	list.appendChild(clue);
+};
+
+function createClues() {
+	let verticalClues = document.getElementById("vertical-clues")
+	let horizontalClues = document.getElementById("horizontal-clues")
+	let puzzle = parsePuzzle();
+
+	verticalClues.innerHTML = "";
+	horizontalClues.innerHTML = "";
+
+	for (let v of puzzle.vertical) {
+		createClue(v, "vertical", verticalClues);
+	};
+
+	for (let h of puzzle.horizontal) {
+		createClue(h, "horizontal", horizontalClues);
+	};
+};
+
+function getClues(puzzle) {
+	let inputs = document.querySelectorAll(".clue-add-container input");
+	[].forEach.call(inputs, function(input) {
+		let direction = input.attributes.direction.value;
+		let number = parseInt(input.attributes.number.value);
+
+		[].forEach.call(puzzle[direction], function(word) {
+			if (word.n == number) {
+				word.clue = input.value;
+			};
+		});
+	});
+
+	return puzzle;
+};
+
 function validatePuzzle() {
 	// Check if puzzle has filled out all squares
 	let valid = true;
@@ -392,11 +472,13 @@ function validatePuzzle() {
 			(tile.value.toLowerCase() == "")
 			&&
 			(!document.getElementById("tile" + tileNumber.toString()).classList.contains("none")) 
-		)
-		{
-			// Cannot add empty puzzle
-			valid = false;
-		};
+		) valid = false;
+	});
+
+	// Check if puzzle has filled out all clues
+	let inputs = document.querySelectorAll(".clue-add-container input");
+	[].forEach.call(inputs, function(input) {
+		if (input.value == "") valid = false;
 	});
 
 	return valid;
@@ -404,6 +486,7 @@ function validatePuzzle() {
 
 function gameAddPuzzle() {
 	let puzzle = parsePuzzle();
+	puzzle = getClues(puzzle);
 
 	return puzzle;
 };

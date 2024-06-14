@@ -1,0 +1,68 @@
+.clues {
+	width: 95%;
+	margin: auto;
+
+	background-color: lightblue;
+
+
+	margin-top: 10px;
+	margin-bottom: 300px;
+	padding: 10px;
+
+	border-radius: 5px;
+
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+}
+
+.clue-add-container {
+	width: 100%;
+
+	margin-top: 5px;
+	margin-bottom: 5px;
+
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+}
+
+.clue-list {
+	padding-left: 10px;
+	margin-top: 3px;
+}
+
+.clue-add {
+	width: 100%;
+
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	
+	justify-content: left;
+	align-items: center;
+
+	margin-top: 3px;
+}
+
+.clue-add .clue-number {
+	font-weight: bold;
+}
+
+.clue-add .input {
+	flex-grow: 1;
+	overflow: hidden;
+
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.clue-add .input input {
+	text-align: left;
+	width: 100%;
+
+	font-size: 16px;
+	font-weight: 500;
+	font-family: Franklin, 'Arial Narrow', Arial, sans-serif;
+	text-transform: none;
+}
