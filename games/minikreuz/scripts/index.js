@@ -55,11 +55,11 @@ async function initialisePuzzle() {
 		"puzzle": {
 			"horizontal": [
 				{
-					"word": "sad",
+					"word": "ssadd",
 					"y": 0,
 					"n": 1,
 					"clue": "In need of some cheering up",
-					"x": 1
+					"x": 0
 				},
 				{
 					"y": 1,
@@ -69,7 +69,7 @@ async function initialisePuzzle() {
 					"clue": "City that holds an annual 'Grand Prix de la baguette' contest"
 				},
 				{
-					"word": "ju",
+					"word": "juice",
 					"y": 2,
 					"n": 6,
 					"x": 0,
@@ -84,9 +84,9 @@ async function initialisePuzzle() {
 				},
 				{
 					"y": 4,
-					"word": "ess",
+					"word": "geess",
 					"n": 8,
-					"x": 1,
+					"x": 0,
 					"clue": "Twice-curved letter"
 				}
 			],
@@ -97,8 +97,8 @@ async function initialisePuzzle() {
 			"vertical": [
 				{
 					"n": 4,
-					"word": "pjs",
-					"y": 1,
+					"word": "pjsss",
+					"y": 0,
 					"x": 0,
 					"clue": "Attire you might wear while working from home, for short"
 				},
@@ -126,8 +126,8 @@ async function initialisePuzzle() {
 				{
 					"x": 4,
 					"n": 5,
-					"y": 1,
-					"word": "ser",
+					"y": 0,
+					"word": "seres",
 					"clue": "Spanish verb meaning 'to be'"
 				}
 			]

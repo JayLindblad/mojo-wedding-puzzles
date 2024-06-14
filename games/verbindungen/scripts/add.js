@@ -1,3 +1,18 @@
+function validatePuzzle() {
+	let allFilled = true;
+	inputs.forEach(input => {
+		if (input.value === '') {
+			allFilled = false;
+		}
+	});
+
+	if (allFilled) {
+		return true;
+	} else {
+		return false;
+	};
+};
+
 function gameAddPuzzle() {
 	let puzzle = {
 		"straightforward": {

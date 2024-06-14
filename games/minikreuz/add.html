@@ -2,12 +2,23 @@
 layout: add.html
 title: Mini Kreuzworträtsel: Puzzle erstellen
 description: Erstelle dein eigenes Mini Kreuzworträtsel Puzzle
-icon: 
 ---
 
+<link rel="stylesheet" href="/assets/minikreuz/styles/index.css">
+<link rel="stylesheet" href="/assets/minikreuz/styles/grid.css">
+<link rel="stylesheet" href="/assets/minikreuz/styles/clue.css">
+<link rel="stylesheet" href="/assets/minikreuz/styles/warning.css">
+<link rel="stylesheet" href="/assets/minikreuz/styles/mobile-bottom.css">
 <link rel="stylesheet" href="/assets/minikreuz/styles/add.css">
 
-<div>
+<div id="grid" class="grid">
 </div>
 
+<div class="mobile-bottom">
+	<div>
+		{% ./games/minikreuz/keyboard.html %}
+	</div>
+</div>
+
+<script src="/assets/minikreuz/scripts/util.js"></script>
 <script src="/assets/minikreuz/scripts/add.js"></script>

@@ -49,6 +49,10 @@ function onTileInput(event) {
 			event.preventDefault();
 			forward();
 			break;
+		case '.':
+			event.preventDefault();
+			forward();
+			break;
 		case 'Backspace':
 			event.preventDefault();
 			let tile = document.getElementById("tileLetter" + tileNumber.toString());

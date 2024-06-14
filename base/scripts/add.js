@@ -1,33 +1,11 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-	const inputs = document.querySelectorAll('input');
-	const button = document.getElementById('send');
-
-	function checkInputs() {
-		let allFilled = true;
-		inputs.forEach(input => {
-			if (input.value === '') {
-				allFilled = false;
-			}
-		});
-
-		if (allFilled) {
-			button.classList.add("active");
-		} else {
-			button.classList.remove("active");
-		}
-	}
-
-	inputs.forEach(input => {
-		input.addEventListener('input', checkInputs);
-	});
-});
-
 function addPuzzle() {
-	const button = document.getElementById('send');
-	if (!button.classList.contains("active")) {
+	if (!validatePuzzle()) {
 		return;
 	};
 	if (firebase.auth().currentUser == null) {
+		return;
+	};
+	if (document.getElementById("author").value == "") {
 		return;
 	};
 

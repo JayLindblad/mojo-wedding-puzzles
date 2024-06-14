@@ -66,7 +66,7 @@ function getWord(tileNumber, selectOrientation) {
 	} else {
 		for (const [_, word] of data.puzzle.vertical.entries()) {
 			let x = tileNumber % data.puzzle.size.x;
-			let y = tileNumber / data.puzzle.size.y;
+			let y = Math.floor(tileNumber / data.puzzle.size.y);
 	
 			if (x == word.x && y >= word.y && y <= word.y + word.word.length) {
 				return word;
