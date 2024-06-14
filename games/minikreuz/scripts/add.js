@@ -45,6 +45,8 @@ function createGrid() {
 }
 
 function onTileClick(e) {
+	document.getElementById("keyboard").style.display = "flex";
+
 	let tileNumber = e.target.attributes.tilenumber.value;
 	if (tileNumber == previousSelected) {
 		selectOrientation = selectOrientation == "horizontal" ? "vertical" : "horizontal";
@@ -442,6 +444,13 @@ function createClues() {
 	for (let h of puzzle.horizontal) {
 		createClue(h, "horizontal", horizontalClues);
 	};
+
+	const clueInputs = document.querySelectorAll('.clues input');
+	clueInputs.forEach(input => {
+		input.addEventListener('focus', () => {
+			document.getElementById("keyboard").style.display = "none";
+		});
+	});
 };
 
 function getClues(puzzle) {
