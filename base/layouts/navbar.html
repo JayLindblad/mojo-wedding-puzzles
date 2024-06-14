@@ -1,28 +1,47 @@
 <div class="title to-blur">
-	<div id="back">
-		<span class="underline"><a href="/">📍 Zurück zu allen Spielen</a></span>
-	</div>
+	{* if (!home) *}
+		<div id="back">
+			<span class="underline"><a href="/">📍 Zurück zu allen Spielen</a></span>
+		</div>
+	{* ifend *}
 	<div class="title-bar">
 		<div id="infos" class="navigate-container">
-			<div>
-				<span class="name"><a href="/{{ slug }}/play.html">{{ name }}</a></span>
-			</div>
-
-			<div>
-				<span class="date" id="date"></span>
-				<span class="author" id="author"></span>
-			</div>
+			{* if (home) *}
+				<div>
+					<span class="name"><a href="/">{{ title }}</a></span>
+				</div>
+			{* ifend *}
+			{* if (!home) *}
+				<div>
+					<span class="name"><a href="/{{ slug }}/play.html">{{ name }}</a></span>
+				</div>
+			{* ifend *}
+			{* if (play) *}
+				<div>
+					<span class="date" id="date"></span>
+					<span class="author" id="author"></span>
+				</div>
+			{* ifend *}
 		</div>
-		<div id="nav" class="navigate-container">
-			<div>
-				<span onclick="backwards('{{ slug }}')" class="navigate" id="backwards">⬅️</span>
+		{* if (play) *}
+			<div id="nav" class="navigate-container">
+				<div>
+					<span onclick="backwards('{{ slug }}')" class="navigate" id="backwards">⬅️</span>
+					<span class="navigate" id="overview"><a href="./all.html">Alle Puzzle</a></span>
+					<span onclick="forwards('{{ slug }}')" class="navigate" id="forwards">➡️</span>
+				</div>
+
+				<div>
+					<button class="button" onclick="showPopup('instructions')" class="instructions" id="">Wie spielt man?</button>
+				</div>
+			</div>
+		{* ifend *}
+		{* if (!play && !home) *}
+			<div class="navigate-container">
 				<span class="navigate" id="overview"><a href="./all.html">Alle Puzzle</a></span>
-				<span onclick="forwards('{{ slug }}')" class="navigate" id="forwards">➡️</span>
+				<span class="navigate" id="overview"><a href="./add.html">Puzzle hinzufügen</a></span>
+				<button onclick="showLoginAlert();" class="button">Login</button>
 			</div>
-
-			<div>
-				<button class="button" onclick="showPopup('instructions')" class="instructions" id="">Wie spielt man?</button>
-			</div>
-		</div>
+		{* ifend *}
 	</div>
 </div>

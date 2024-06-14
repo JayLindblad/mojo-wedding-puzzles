@@ -1,4 +1,4 @@
-inotifywait -q -m -e close_write ./games/**/* |
+inotifywait -q -m -e close_write ./**/* |
 while read -r filename event; do
 	cd ~/dev/modular-games
 	pkill -f "python -m http.server"

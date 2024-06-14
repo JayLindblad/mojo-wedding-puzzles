@@ -4,6 +4,7 @@ import os
 import shutil
 import re
 import json
+import copy
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -92,6 +93,37 @@ def replace_game_tags(folder, html):
 
 	return html
 
+def replace_if_tags(html, metadata):
+	logger.debug(f"Replacing if tags")
+
+	ifs = r'\{\*\s*if\s*\(([^)]*)\)\s*\*\}([\s\S]*?)\{\*\s*ifend\s*\*\}'
+
+	while re.search(ifs, html):
+		match = re.search(ifs, html)
+		if_condition = match.group(1)
+
+		if_content = match.group(2)
+		whole = match.string[match.start():match.end()]
+
+		statement = ""
+		for if_c in if_condition.split("&&"):
+			if_c = if_c.strip()
+			if if_c[0] == "!":
+				statement += f"not '{if_c[1:]}' in globals()"
+			else:
+				statement += f"'{if_c}' in globals()"
+			
+			statement += " and "
+		
+		statement = statement[:-5]
+
+		if eval(statement, metadata) == True:
+			html = html.replace(whole, if_content)
+		else:
+			html = html.replace(whole, "")
+
+	return html
+
 def replace_games(layout):
 	match = re.search(r'{#\s*(\S+)\s*#}', layout)
 
@@ -154,6 +186,9 @@ def apply_template(page, extra_metadata={}):
 
 	# replace # loop tags
 	layout = replace_games(layout)
+
+	# replace if tags
+	layout = replace_if_tags(layout, copy.deepcopy(metadata))
 
 	# replace layout vars by metadata
 	for key, value in metadata.items():
