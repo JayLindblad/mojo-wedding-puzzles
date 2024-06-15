@@ -44,6 +44,17 @@ function saveLetters() {
 	localStorage.setItem(data.metadata.id, JSON.stringify(stored));
 };
 
+function storeClues() {
+	let clues = {};
+
+	const clueInputs = document.querySelectorAll('.clues input');
+	clueInputs.forEach(input => {
+		clues[input.attributes.word.value] = input.value;
+	});
+
+	window.localStorage.setItem(data.metadata.id + "_clues", JSON.stringify(clues));
+};
+
 function populateGrid() {
 	for (let y = 0; y < data.puzzle.size.y; y++) {
 		for (let x = 0; x < data.puzzle.size.x; x++) {
@@ -435,7 +446,7 @@ function parsePuzzle() {
 	return puzzle;
 };
 
-function createClue(w, direction, list) {
+function createClue(w, direction, list, clues) {
 	let clue = document.createElement("div");
 	clue.classList.add("clue-add");
 
@@ -449,8 +460,10 @@ function createClue(w, direction, list) {
 	let clueText = document.createElement("div");
 	clueText.classList.add("input")
 	let clueInput = document.createElement("input");
-	clueInput.setAttribute("direction", direction)
+	clueInput.setAttribute("word", w.word.toUpperCase());
+	clueInput.setAttribute("direction", direction);
 	clueInput.setAttribute("number", w.n.toString());
+	clueInput.value = clues[w.word.toUpperCase()] != undefined ? clues[w.word.toUpperCase()] : "";
 	clueText.appendChild(clueInput);
 
 	clue.appendChild(number);
@@ -465,15 +478,17 @@ function createClues() {
 	let horizontalClues = document.getElementById("horizontal-clues")
 	let puzzle = parsePuzzle();
 
+	let clues = window.localStorage.getItem(data.metadata.id + "_clues") != null ? JSON.parse(window.localStorage.getItem(data.metadata.id + "_clues")) : {};
+
 	verticalClues.innerHTML = "";
 	horizontalClues.innerHTML = "";
 
 	for (let v of puzzle.vertical) {
-		createClue(v, "vertical", verticalClues);
+		createClue(v, "vertical", verticalClues, clues);
 	};
 
 	for (let h of puzzle.horizontal) {
-		createClue(h, "horizontal", horizontalClues);
+		createClue(h, "horizontal", horizontalClues, clues);
 	};
 
 	const clueInputs = document.querySelectorAll('.clues input');
@@ -481,6 +496,7 @@ function createClues() {
 		input.addEventListener('focus', () => {
 			document.getElementById("keyboard").style.display = "none";
 		});
+		input.addEventListener('keyup', storeClues);
 	});
 };
 
