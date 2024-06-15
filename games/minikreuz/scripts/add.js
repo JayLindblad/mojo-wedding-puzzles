@@ -142,6 +142,9 @@ function onTileInput(event) {
 			
 			previousSelected = x + y * data.puzzle.size.y;
 
+			createClues();
+			saveLetters();
+
 			break;
 		case 'ArrowUp':
 			if (selectOrientation == "vertical") {
@@ -155,7 +158,7 @@ function onTileInput(event) {
 			break;
 		case 'ArrowDown':
 			if (selectOrientation == "vertical") {
-				if (y < 4) {
+				if (y < data.puzzle.size.y - 1) {
 					y += 1;
 				};
 				previousSelected = x + y * data.puzzle.size.y;
@@ -175,7 +178,7 @@ function onTileInput(event) {
 			break;
 		case 'ArrowRight':
 			if (selectOrientation == "horizontal") {
-				if (x < 4) {
+				if (x < data.puzzle.size.x - 1) {
 					x += 1;
 				};
 				previousSelected = x + y * data.puzzle.size.y;
