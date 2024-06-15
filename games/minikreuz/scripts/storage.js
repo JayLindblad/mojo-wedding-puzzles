@@ -46,4 +46,5 @@ function resetState() {
 	localStorage.setItem(data.metadata.id + "_started", Date.now());
 	timeDiff = 0;
 	localStorage.setItem(data.metadata.id + "_diff", timeDiff);
+	localStorage.remove(data.metadata.id);
 }

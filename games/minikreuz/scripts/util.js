@@ -81,15 +81,15 @@ function getWord(tileNumber, selectOrientation) {
 
 function checkInputs() {
 	// Get all tiles
-	let tiles = document.querySelectorAll(".tile:not(.none)");
+	let tiles = document.querySelectorAll(".tile:not(.none) input");
 	let correct = true;
 	let completed = true;
 
 	[].forEach.call(tiles, function(el) {
-		if (el.childNodes[0].value.toUpperCase() != el.childNodes[0].attributes.letter.value.toUpperCase()) {
+		if (el.value.toUpperCase() != el.attributes.letter.value.toUpperCase()) {
 			correct = false;
 		};
-		if (el.childNodes[0].value == "") {
+		if (el.value == "") {
 			completed = false;
 		};
 	});
