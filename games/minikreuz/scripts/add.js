@@ -99,16 +99,20 @@ function onTileClick(e) {
 	highlightWord();
 };
 
+function resetPuzzle() {
+	window.localStorage.removeItem(data.metadata.id);
+	window.localStorage.removeItem(data.metadata.id + "_clues");
+	initialisePuzzle();
+	createClues();
+};
+
 function changeSize() {
 	let size = parseInt(document.getElementById("size").value);
 	
 	data.puzzle.size.x = size;
 	data.puzzle.size.y = size;
 
-	window.localStorage.removeItem(data.metadata.id);
-	window.localStorage.removeItem(data.metadata.id + "_clues");
-	initialisePuzzle();
-	createClues();
+	resetPuzzle();
 };
 
 function onTileInput(event) {
