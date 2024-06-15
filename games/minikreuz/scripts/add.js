@@ -214,10 +214,10 @@ function nextTile() {
 	let y = Math.floor(previousSelected / data.puzzle.size.y);
 
 	if (selectOrientation == "horizontal") {
-		if (x < 4) {
+		if (x < data.puzzle.size.x - 1) {
 			x += 1;
 		} else {
-			if (y < 4) {
+			if (y < data.puzzle.size.y - 1) {
 				x = 0;
 				y += 1;
 			} else {
@@ -226,10 +226,10 @@ function nextTile() {
 			};
 		};
 	} else {
-		if (y < 4) {
+		if (y < data.puzzle.size.y - 1) {
 			y += 1;
 		} else {
-			if (x < 4) {
+			if (x < data.puzzle.size.x - 1) {
 				y = 0;
 				x += 1;
 			} else {
