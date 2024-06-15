@@ -32,7 +32,7 @@ function clearLetters() {
 
 function loadState() {
 	// Get timer start
-	started = localStorage.getItem(data.metadata.id + "_started") == null ? Date.now() : localStorage.getItem(data.metadata.id + "_started");
+	timeDiff = localStorage.getItem(data.metadata.id + "_diff") == null ? 0 : localStorage.getItem(data.metadata.id + "_diff");
 	ended = localStorage.getItem(data.metadata.id + "_ended") == null ? ended : localStorage.getItem(data.metadata.id + "_ended");
 	
 	if (ended == true) {
@@ -41,10 +41,9 @@ function loadState() {
 };
 
 function resetState() {
-	localStorage.setItem(data.metadata.id + "_ended", ended);
-	started = Date.now();
-	localStorage.setItem(data.metadata.id + "_started", Date.now());
 	timeDiff = 0;
 	localStorage.setItem(data.metadata.id + "_diff", timeDiff);
+	
+	localStorage.setItem(data.metadata.id + "_ended", ended);
 	localStorage.remove(data.metadata.id);
 }

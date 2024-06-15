@@ -26,6 +26,7 @@ function reset() {
 
 	if (ended) {
 		// Reset global vars
+		timeDiff = 0;
 		ended = false;
 		success = true;
 		mistakes = 0;
@@ -33,9 +34,6 @@ function reset() {
 };
 
 function gameEnd(log) {
-	timeDiff = localStorage.getItem(data.metadata.id + "_diff") == null ? Date.now() - started : localStorage.getItem(data.metadata.id + "_diff");
-	localStorage.setItem(data.metadata.id + "_diff", timeDiff);
-
 	if (log) {
 		puzzleEndEvent(data.metadata.id, success, mistakes, timeDiff);
 		ended = true;

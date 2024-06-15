@@ -3,7 +3,6 @@ let success = true;
 let mistakes = 0;
 
 let ended = false;
-let started = Date.now();
 let timeDiff = 0;
 let showedComplete = false;
 
@@ -96,16 +95,16 @@ async function initialisePuzzle() {
 		input.addEventListener('click', onTileClick);
 		input.addEventListener('keydown', onTileInput);
 	});
-	
-	// Create timer
-	window.setInterval(() => { 
-		localStorage.setItem(data.metadata.id + "_started", started);
-		timeDiff = Date.now() - started;
-		document.getElementById("timer").innerHTML = "Timer: " + getResults();
-	}, 1000);
 
 	// Load state
 	loadState();
+	
+	// Create timer
+	window.setInterval(() => {
+		timeDiff = parseInt(timeDiff) + 1000;
+		localStorage.setItem(data.metadata.id + "_diff", timeDiff);
+		document.getElementById("timer").innerHTML = "Timer: " + getResults();
+	}, 1000);
 };
 
 document.addEventListener('DOMContentLoaded', (event) => {
