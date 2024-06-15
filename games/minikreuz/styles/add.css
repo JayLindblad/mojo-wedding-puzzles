@@ -66,3 +66,13 @@
 	font-family: Franklin, 'Arial Narrow', Arial, sans-serif;
 	text-transform: none;
 }
+
+.size-container {
+	width: 95%;
+	margin: auto;
+	
+	display: flex;
+	justify-content: center;
+
+	margin-top: 10px;
+}

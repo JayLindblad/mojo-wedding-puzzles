@@ -66,6 +66,7 @@ function populateGrid() {
 
 function createGrid() {
 	let grid = document.getElementById("grid");
+	grid.innerHTML = "";
 
 	for (let y = 0; y < data.puzzle.size.y; y++) {
 		let row = document.createElement("div");
@@ -96,6 +97,18 @@ function onTileClick(e) {
 	previousSelected = tileNumber;
 
 	highlightWord();
+};
+
+function changeSize() {
+	let size = parseInt(document.getElementById("size").value);
+	
+	data.puzzle.size.x = size;
+	data.puzzle.size.y = size;
+
+	window.localStorage.removeItem(data.metadata.id);
+	window.localStorage.removeItem(data.metadata.id + "_clues");
+	initialisePuzzle();
+	createClues();
 };
 
 function onTileInput(event) {
@@ -335,6 +348,16 @@ function parsePuzzle() {
 		let x = i % data.puzzle.size.x;
 		let y = Math.floor(i / data.puzzle.size.y);
 
+		// only allow words which have none squares or border on top
+		if (y != 0) {
+			let topY = y - 1;
+			let tileNumber = x + topY * data.puzzle.size.y;
+
+			if (!document.getElementById("tile" + tileNumber.toString()).classList.contains("none")) {
+				continue;
+			};
+		};
+
 		// check if already in another down word
 		let collision = false;
 		for (let w of puzzle.vertical) {
@@ -390,6 +413,16 @@ function parsePuzzle() {
 		let word = "";
 		let x = i % data.puzzle.size.x;
 		let y = Math.floor(i / data.puzzle.size.y);
+
+		// only allow words which have none squares or border to the left
+		if (x != 0) {
+			let topX = x - 1;
+			let tileNumber = topX + y * data.puzzle.size.y;
+
+			if (!document.getElementById("tile" + tileNumber.toString()).classList.contains("none")) {
+				continue;
+			};
+		};
 
 		// check if already in another down word
 		let collision = false;
