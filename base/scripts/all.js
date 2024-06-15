@@ -17,7 +17,7 @@ function getPuzzles() {
 	.catch((error) => {
 		alert("Error getting puzzle");
 	});
-}
+};
 
 function deletePuzzle(id) {
 	db.collection(game).doc(id).delete().then(() => {

@@ -26,7 +26,8 @@ function clearLetters() {
 	[].forEach.call(inputs, function(el) {
 		el.value = "";
 	});
-	saveLetters();
+	
+	window.localStorage.removeItem(data.metadata.id);
 };
 
 function loadState() {
