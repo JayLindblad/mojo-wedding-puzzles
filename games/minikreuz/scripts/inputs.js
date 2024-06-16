@@ -48,6 +48,10 @@ function onTileInput(event) {
 			break;
 		case 'Backspace':
 			event.preventDefault();
+			
+			// prevent modifying puzzle after game has ended
+			if (ended == true) return;
+
 			let tile = document.getElementById("tileLetter" + tileNumber.toString());
 			tile.value = "";
 			saveLetters();
