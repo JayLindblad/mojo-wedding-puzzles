@@ -10,12 +10,18 @@ function showCompleted() {
 
 function onTileClick(e) {
 	let tileNumber = e.target.attributes.tilenumber.value;
+	newOrientation = selectOrientation == "horizontal" ? "vertical" : "horizontal";
+	
 	if (tileNumber == previousSelected) {
-		selectOrientation = selectOrientation == "horizontal" ? "vertical" : "horizontal";
+		selectOrientation = newOrientation;
 	};
 	previousSelected = tileNumber;
-
 	let word = getWord(tileNumber, selectOrientation);
+
+	if (!word) {
+		selectOrientation = selectOrientation == "horizontal" ? "vertical" : "horizontal";
+		word = getWord(tileNumber, selectOrientation);
+	};
 
 	highlightWord(word);
 };
