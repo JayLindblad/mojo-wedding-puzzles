@@ -211,7 +211,7 @@ function onTileInput(event) {
 			if (
 				!tile.classList.contains("none") 
 				&& 
-				"abcdefghijklmnopqrstuvwxyz".indexOf(event.key) >= 0
+				"abcdefghijklmnopqrstuvwxyzäöü".indexOf(event.key) >= 0
 			) {
 				// Set input value to key
 				event.target.value = event.key;

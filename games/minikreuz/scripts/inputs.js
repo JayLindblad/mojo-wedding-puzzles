@@ -7,7 +7,7 @@ function onKeyPress(e) {
 	};
 
 	// Check if key is letter
-	if ("abcdefghijklmnopqrstuvwxyz".indexOf(e.key) < 0) {
+	if ("abcdefghijklmnopqrstuvwxyzäöü".indexOf(e.key) < 0) {
 		return;
 	};
 
