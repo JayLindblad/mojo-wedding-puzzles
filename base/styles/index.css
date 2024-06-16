@@ -1,6 +1,9 @@
 :root {
 	--bg-color: white;
 	--title-bg: white;
+	
+	--lighter-bg: rgb(244, 244, 244);
+	--sec-bg: rgb(189, 189, 189);
 
 	--text: black;
 	--text-secondary: rgb(86, 86, 86);

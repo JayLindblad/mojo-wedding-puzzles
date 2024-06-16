@@ -1,33 +1,4 @@
 @media (pointer:none), (pointer:coarse) {
-	@media (min-width: 450px) and (max-height: 900px) {
-		.title #infos, .title #back {
-			display: none;
-		}
-	
-		.title, .title-bar {
-			padding: 3px;
-			margin: 0px;
-		}
-	
-		.buttons {
-			margin: 4px;
-		}
-	}
-	@media (max-width: 450px) and (max-height: 850px) {
-		.title #infos, .title #back {
-			display: none;
-		}
-	
-		.title, .title-bar {
-			padding: 3px;
-			margin: 0px;
-		}
-	
-		.buttons {
-			margin: 4px;
-		}
-	}
-
 	.mobile-bottom {
 		position: fixed;
 		bottom: 0;

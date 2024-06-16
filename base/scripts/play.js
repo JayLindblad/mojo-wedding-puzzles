@@ -1,6 +1,6 @@
 function metadataSetup(metadata) {
 	let author = document.getElementById("author");
-	author.innerHTML = "by " + metadata.author;
+	author.innerHTML = "von " + metadata.author;
 	let date = document.getElementById("date");
 	date.innerHTML = new Date(metadata.timestamp).toLocaleString('de-DE', {year: 'numeric', month: '2-digit', day:'2-digit'});
 };

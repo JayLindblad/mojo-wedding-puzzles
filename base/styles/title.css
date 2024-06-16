@@ -1,18 +1,28 @@
 .title {
-	padding: 20px;
-
+	z-index: 99;
+	
+	padding: 8px;
 	margin-bottom: 20px;
 
+	height: 30px;
+	overflow: hidden;
+
 	background-color: var(--title-bg);
-	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.22);
+	border-bottom: 1px solid var(--sec-bg);
+
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .title-bar {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
+	position: relative;
 
-	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+
+	justify-content: center;
 }
 
 .name {
@@ -38,8 +48,4 @@
 
 .navigate {
 	cursor: pointer;
-}
-
-.underline {
-	text-decoration: underline;
 }

@@ -6,10 +6,17 @@
 <link rel="stylesheet" href="/assets/styles/animations.css">
 <link rel="stylesheet" href="/assets/styles/popups.css">
 <link rel="stylesheet" href="/assets/styles/button.css">
+<link rel="stylesheet" href="/assets/styles/menu.css">
+<link rel="stylesheet" href="/assets/styles/side-list.css">
 
 <script src="/assets/scripts/util.js"></script>
 <script>
 	let game = window.location.pathname.split("/")[1];
+	document.addEventListener('DOMContentLoaded', (event) => {
+		if (game != "") {
+			document.getElementById(game).classList.add("highlight-game");
+		};
+	});
 </script>
 
 <meta charset="utf-8">

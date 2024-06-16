@@ -1,47 +1,100 @@
 <div class="title to-blur">
-	{* if (!home) *}
-		<div id="back">
-			<span class="underline"><a href="/">📍 Zurück zu allen Spielen</a></span>
-		</div>
-	{* ifend *}
 	<div class="title-bar">
+		<div class="">
+			<a id="nav-toggle" class="nav-toggle">
+				<span class="nav-toggle-bar nav-toggle-bar--top"></span>
+				<span class="nav-toggle-bar nav-toggle-bar--middle"></span>
+				<span class="nav-toggle-bar nav-toggle-bar--bottom"></span>
+			</a>
+			<script>
+				document.getElementById('nav-toggle')
+				.addEventListener('click', function(){
+					document.getElementById("nav-toggle").classList.toggle('nav-open');
+					document.getElementById("nav-menu").classList.toggle('show-menu');
+				});
+			</script>
+		</div>
 		<div id="infos" class="navigate-container">
 			{* if (home) *}
 				<div>
 					<span class="name"><a href="/">{{ title }}</a></span>
 				</div>
 			{* ifend *}
-			{* if (!home) *}
+			{* if (!home && !play) *}
 				<div>
 					<span class="name"><a href="/{{ slug }}/play.html">{{ name }}</a></span>
 				</div>
 			{* ifend *}
 			{* if (play) *}
+				<div id="nav" class="navigate-container">
+					<div>
+						<span onclick="backwards('{{ slug }}')" class="navigate" id="backwards">⬅️</span>
+						<span class="navigate" id="overview"><a href="./all.html">Alle Puzzle</a></span>
+						<span onclick="forwards('{{ slug }}')" class="navigate" id="forwards">➡️</span>
+					</div>
+	
+					<div>
+						<button class="button" onclick="showPopup('instructions')" class="instructions" id="">Wie spielt man?</button>
+					</div>
+				</div>
+			{* ifend *}
+		</div>
+	</div>
+</div>
+<div id="nav-menu" class="nav-menu to-blur">
+	<div class="side-list">
+		<div class="side-list-title side-list-item">
+			<a href="/">Die deutschen Rätsel</a>
+		</div>
+		{# games-small #}
+		<div class="side-list-item">
+			<a href="/">Alle Rätsel</a>
+		</div>
+		<div class="side-list-item side-game-specific">
+			{* if (play && !home) *}
 				<div>
+					<b>
+						Das Rätsel wurde hochgeladen am:
+					</b>
 					<span class="date" id="date"></span>
 					<span class="author" id="author"></span>
 				</div>
 			{* ifend *}
+			{* if (!home) *}
+				<div>
+					<div class="navigate-container">
+						<span class="navigate" id="overview"><a href="./all.html">Alle Puzzle</a></span>
+						<span class="navigate" id="overview"><a href="./add.html">Puzzle hinzufügen</a></span>
+						<button onclick="showLoginAlert();" class="button">Login</button>
+					</div>
+				</div>
+			{* ifend *}
 		</div>
-		{* if (play) *}
-			<div id="nav" class="navigate-container">
-				<div>
-					<span onclick="backwards('{{ slug }}')" class="navigate" id="backwards">⬅️</span>
-					<span class="navigate" id="overview"><a href="./all.html">Alle Puzzle</a></span>
-					<span onclick="forwards('{{ slug }}')" class="navigate" id="forwards">➡️</span>
-				</div>
-
-				<div>
-					<button class="button" onclick="showPopup('instructions')" class="instructions" id="">Wie spielt man?</button>
-				</div>
-			</div>
-		{* ifend *}
-		{* if (!play && !home) *}
-			<div class="navigate-container">
-				<span class="navigate" id="overview"><a href="./all.html">Alle Puzzle</a></span>
-				<span class="navigate" id="overview"><a href="./add.html">Puzzle hinzufügen</a></span>
-				<button onclick="showLoginAlert();" class="button">Login</button>
-			</div>
-		{* ifend *}
 	</div>
 </div>
+<!-- {* if (play) *}
+	<div>
+		<span class="date" id="date"></span>
+		<span class="author" id="author"></span>
+	</div>
+{* ifend *} -->
+<!-- {* if (play) *}
+	<div id="nav" class="navigate-container">
+		<div>
+			<span onclick="backwards('{{ slug }}')" class="navigate" id="backwards">⬅️</span>
+			<span class="navigate" id="overview"><a href="./all.html">Alle Puzzle</a></span>
+			<span onclick="forwards('{{ slug }}')" class="navigate" id="forwards">➡️</span>
+		</div>
+
+		<div>
+			<button class="button" onclick="showPopup('instructions')" class="instructions" id="">Wie spielt man?</button>
+		</div>
+	</div>
+{* ifend *} -->
+<!-- {* if (!play && !home) *}
+	<div class="navigate-container">
+		<span class="navigate" id="overview"><a href="./all.html">Alle Puzzle</a></span>
+		<span class="navigate" id="overview"><a href="./add.html">Puzzle hinzufügen</a></span>
+		<button onclick="showLoginAlert();" class="button">Login</button>
+	</div>
+{* ifend *} -->
