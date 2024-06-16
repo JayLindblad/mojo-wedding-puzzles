@@ -33,7 +33,7 @@ function clearLetters() {
 function loadState() {
 	// Get timer start
 	timeDiff = window.localStorage.getItem(data.metadata.id + "_diff") == null ? 0 : localStorage.getItem(data.metadata.id + "_diff");
-	ended = window.localStorage.getItem(data.metadata.id + "_ended") == null ? ended : JSON.parse(localStorage.getItem(data.metadata.id + "_ended");
+	ended = window.localStorage.getItem(data.metadata.id + "_ended") == null ? ended : localStorage.getItem(data.metadata.id + "_ended");
 	
 	if (ended == true) {
 		gameEnd(false);
@@ -46,4 +46,4 @@ function resetState() {
 	
 	window.localStorage.setItem(data.metadata.id + "_ended", ended);
 	window.localStorage.removeItem(data.metadata.id);
-}
+};
