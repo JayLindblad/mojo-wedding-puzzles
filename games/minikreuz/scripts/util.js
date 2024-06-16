@@ -57,8 +57,62 @@ function moveTile(tileNumber, word, direction) {
 	document.getElementById("tileLetter" + tileNumber.toString()).focus();
 };
 
-function getWord(tileNumber, selectOrientation) {
+function moveTextInput(tileNumber, word, n = 0) {
+	// handle skipping to next input
+	let x = tileNumber % data.puzzle.size.x;
+	let y = Math.floor(tileNumber / data.puzzle.size.y);
+
+	// Check if word is completely filled
+	let allFilled = true;
 	if (selectOrientation == "horizontal") {
+		for (let i = word.x; i < (word.word.length + word.x - 1); i++) {
+			let wordTile = y * data.puzzle.size.y + i;
+			if (document.getElementById("tileLetter" + wordTile.toString()).value == "") {
+				allFilled = false;
+				break;
+			};
+		};
+	} else {		
+		for (let i = word.y; i < (word.word.length + word.y - 1); i++) {
+			let wordTile = i * data.puzzle.size.y + x;
+			if (document.getElementById("tileLetter" + wordTile.toString()).value == "") {
+				allFilled = false;
+				break;
+			};
+		};
+	};
+
+	if (selectOrientation == "horizontal") {
+		if (x < word.x + word.word.length - 1) {
+			x += 1;
+		} else if (!allFilled) {
+			// if the word is not completely filled
+			// skip back to beginning and go to non-filled tile
+			x = word.x;
+		};
+		tileNumber = y * data.puzzle.size.y + x;
+	} else {
+		if (y < word.y + word.word.length - 1) {
+			y += 1;
+		} else if (!allFilled) {
+			// if the word is not completely filled
+			// skip back to beginning and go to non-filled tile
+			y = word.y;
+		};
+		tileNumber = y * data.puzzle.size.y + x;
+	};
+
+	document.getElementById("tileLetter" + tileNumber.toString()).focus();
+	previousSelected = tileNumber;
+
+	if (!allFilled && document.getElementById("tileLetter" + tileNumber.toString()).value != "" && n < word.word.length) {
+		// check if all squares in word are filled
+		moveTextInput(tileNumber, word, n+1);
+	};
+};
+
+function getWord(tileNumber, orientation) {
+	if (orientation == "horizontal") {
 		for (const [_, word] of data.puzzle.horizontal.entries()) {
 			let x = tileNumber % data.puzzle.size.x;
 			let y = Math.floor(tileNumber / data.puzzle.size.y);
