@@ -1,9 +1,31 @@
+function updateLocalStorage(property, value) {
+	let storedData = JSON.parse(window.localStorage.getItem(data.metadata.id));
+	storedData[property] = value;
+	window.localStorage.setItem(data.metadata.id, JSON.stringify(storedData));
+};
+
+function loadState() {
+	// Get timer start
+	let loaded = window.localStorage.getItem(data.metadata.id);
+	if (loaded != undefined) {
+		gameState = JSON.parse(loaded);
+		if (Object.keys(gameState.letters).length > 0) {
+			gameState.letters = JSON.parse(gameState.letters);
+		};
+	} else {
+		window.localStorage.setItem(data.metadata.id, JSON.stringify(gameState));
+	};
+	
+	if (gameState.ended == true) {
+		gameEnd(false);
+	};
+};
+
 function loadLetters() {
-	let stored = localStorage.getItem(data.metadata.id);
+	loadState();
+	let stored = gameState.letters;
 
-	if (stored != null) {
-		stored = JSON.parse(stored);
-
+	if (Object.keys(gameState.letters).length) {
 		for (const [key, value] of Object.entries(stored)) {
 			document.getElementById(key).value = value;
 		};
@@ -18,7 +40,7 @@ function saveLetters() {
 		stored[el.id] = el.value;
 	});
 
-	localStorage.setItem(data.metadata.id, JSON.stringify(stored));
+	updateLocalStorage("letters", JSON.stringify(stored));
 };
 
 function clearLetters() {
@@ -27,23 +49,16 @@ function clearLetters() {
 		el.value = "";
 	});
 	
-	window.localStorage.removeItem(data.metadata.id);
-};
-
-function loadState() {
-	// Get timer start
-	timeDiff = window.localStorage.getItem(data.metadata.id + "_diff") == null ? 0 : localStorage.getItem(data.metadata.id + "_diff");
-	ended = window.localStorage.getItem(data.metadata.id + "_ended") == null ? ended : localStorage.getItem(data.metadata.id + "_ended");
-	
-	if (ended == true) {
-		gameEnd(false);
-	};
+	updateLocalStorage("letters", {});
 };
 
 function resetState() {
-	timeDiff = 0;
-	window.localStorage.setItem(data.metadata.id + "_diff", timeDiff);
-	
-	window.localStorage.setItem(data.metadata.id + "_ended", ended);
-	window.localStorage.removeItem(data.metadata.id);
+	window.localStorage.setItem(data.metadata.id, JSON.stringify({
+		ended: false,
+		timeDiff: 0,
+		showedComplete: false,
+		previousSelected: -1,
+		selectOrientation: "horizontal",
+		letters: {}
+	}));
 };

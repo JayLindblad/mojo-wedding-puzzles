@@ -2,50 +2,52 @@ function showCompleted() {
 	// Count amount of attempts
 	mistakes += 1;
 
-	if (!showedComplete) {
+	if (!gameState.showedComplete) {
 		document.getElementById("completed").classList.add("popup-open");
-		showedComplete = true;
+		gameState.showedComplete = true;
+		updateLocalStorage("showedComplete", true);
 	};
 }
 
 function onTileClick(e) {
-	let tileNumber = e.target.attributes.tilenumber.value;
-	newOrientation = selectOrientation == "horizontal" ? "vertical" : "horizontal";
+	let tileNumber = parseInt(e.target.attributes.tilenumber.value);
+	newOrientation = gameState.selectOrientation == "horizontal" ? "vertical" : "horizontal";
 	
-	if (tileNumber == previousSelected) {
-		selectOrientation = newOrientation;
+	if (tileNumber == gameState.previousSelected) {
+		gameState.selectOrientation = newOrientation;
 	};
-	previousSelected = tileNumber;
-	let word = getWord(tileNumber, selectOrientation);
+	gameState.previousSelected = tileNumber;
+	let word = getWord(tileNumber, gameState.selectOrientation);
 
 	if (!word) {
-		selectOrientation = selectOrientation == "horizontal" ? "vertical" : "horizontal";
-		word = getWord(tileNumber, selectOrientation);
+		gameState.selectOrientation = gameState.selectOrientation == "horizontal" ? "vertical" : "horizontal";
+		word = getWord(tileNumber, gameState.selectOrientation);
 	};
 
 	highlightWord(word);
 };
 
 function reset() {
-	clearLetters();
-	resetState();
-
-	if (ended) {
+	if (gameState.ended) {
 		// Reset global vars
-		timeDiff = 0;
-		ended = false;
+		gameState.timeDiff = 0;
+		gameState.ended = false;
+
 		success = true;
 		mistakes = 0;
 
 		document.getElementById("showresults").remove();
 	};
+	
+	clearLetters();
+	resetState();
 };
 
 function gameEnd(log) {
 	if (log) {
-		puzzleEndEvent(data.metadata.id, { success, mistakes, time: timeDiff });
-		ended = true;
-		localStorage.setItem(data.metadata.id + "_ended", ended);
+		puzzleEndEvent(data.metadata.id, { success, mistakes, time: gameState.timeDiff });
+		gameState.ended = true;
+		updateLocalStorage("ended", gameState.ended);
 	};
 	
 	let buttons = document.getElementById("buttons");

@@ -2,7 +2,7 @@ function onKeyPress(e) {
 	e.preventDefault();
 
 	// Check if gameEnded to prevent modification
-	if (ended == true) {
+	if (gameState.ended == true) {
 		return;
 	};
 
@@ -12,7 +12,7 @@ function onKeyPress(e) {
 	};
 
 	let tileNumber = e.target.attributes.tilenumber.value;
-	let word = getWord(tileNumber, selectOrientation);
+	let word = getWord(tileNumber, gameState.selectOrientation);
 
 	// Set input value to key
 	e.target.value = e.key;
@@ -30,8 +30,8 @@ function onKeyPress(e) {
 };
 
 function onTileInput(event) {
-	let tileNumber = previousSelected;
-	let word = getWord(tileNumber, selectOrientation);
+	let tileNumber = gameState.previousSelected;
+	let word = getWord(tileNumber, gameState.selectOrientation);
 
 	switch(event.key) {
 		case 'Tab':
@@ -50,7 +50,7 @@ function onTileInput(event) {
 			event.preventDefault();
 			
 			// prevent modifying puzzle after game has ended
-			if (ended == true) return;
+			if (gameState.ended == true) return;
 
 			let tile = document.getElementById("tileLetter" + tileNumber.toString());
 			tile.value = "";
@@ -58,7 +58,7 @@ function onTileInput(event) {
 			moveTile(tileNumber, word, false);		
 			break;
 		case 'ArrowUp':
-			if (selectOrientation == "vertical") {
+			if (gameState.selectOrientation == "vertical") {
 				moveTile(tileNumber, word, false);
 			} else {
 				onTileClick({
@@ -67,7 +67,7 @@ function onTileInput(event) {
 			};
 			break;
 		case 'ArrowDown':
-			if (selectOrientation == "vertical") {
+			if (gameState.selectOrientation == "vertical") {
 				moveTile(tileNumber, word, true);
 			} else {
 				onTileClick({
@@ -76,7 +76,7 @@ function onTileInput(event) {
 			};
 			break;
 		case 'ArrowLeft':
-			if (selectOrientation == "horizontal") {
+			if (gameState.selectOrientation == "horizontal") {
 				moveTile(tileNumber, word, false);
 			} else {
 				onTileClick({
@@ -85,7 +85,7 @@ function onTileInput(event) {
 			};
 			break;
 		case 'ArrowRight':
-			if (selectOrientation == "horizontal") {
+			if (gameState.selectOrientation == "horizontal") {
 				moveTile(tileNumber, word, true);
 			} else {
 				onTileClick({

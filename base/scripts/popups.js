@@ -9,7 +9,6 @@ function showPopup(id) {
 }
 
 function closePopup(id) {
-	console.log(id)
 	let el = document.getElementById(id);
 	el.classList.remove("popup-open");
 	let toBlur = document.querySelectorAll(".to-blur");

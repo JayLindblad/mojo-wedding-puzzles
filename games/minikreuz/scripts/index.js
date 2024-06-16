@@ -2,12 +2,14 @@ let data = {};
 let success = true;
 let mistakes = 0;
 
-let ended = false;
-let timeDiff = 0;
-let showedComplete = false;
-
-let previousSelected = -1;
-let selectOrientation = "horizontal";
+let gameState = {
+	ended: false,
+	timeDiff: 0,
+	showedComplete: false,
+	previousSelected: -1,
+	selectOrientation: "horizontal",
+	letters: {}
+};
 
 function initialiseGrid() {
 	let grid = document.getElementById("grid");
@@ -77,13 +79,16 @@ async function initialisePuzzle() {
 	initialiseGrid();
 	populateGrid();
 
+	// Load state
+	loadState();
+
 	// highlight initial word
 	let tileNumber = document.querySelector(".tile:not(.none)").id.substring(4);
-	let word = getWord(tileNumber, selectOrientation);
+	let word = getWord(tileNumber, gameState.selectOrientation);
 	highlightWord(word);
 
 	// select first input
-	previousSelected = data.puzzle.horizontal[0].x + data.puzzle.horizontal[0].y * data.puzzle.size.y;
+	gameState.previousSelected = data.puzzle.horizontal[0].x + data.puzzle.horizontal[0].y * data.puzzle.size.y;
 	focusInput();
 
 	// populate letters with stored
@@ -95,15 +100,12 @@ async function initialisePuzzle() {
 		input.addEventListener('click', onTileClick);
 		input.addEventListener('keydown', onTileInput);
 	});
-
-	// Load state
-	loadState();
 	
 	// Create timer
 	window.setInterval(() => {
-		if (!ended) {
-			timeDiff = parseInt(timeDiff) + 1000;
-			localStorage.setItem(data.metadata.id + "_diff", timeDiff);
+		if (!gameState.ended) {
+			gameState.timeDiff = gameState.timeDiff + 1000;
+			updateLocalStorage("timeDiff", gameState.timeDiff);
 			document.getElementById("timer").innerHTML = "Timer: " + getResults();
 		};
 	}, 1000);

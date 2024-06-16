@@ -3,8 +3,8 @@ function getResults() {
 	const msInSecond = 1000;
 	const msInMinute = msInSecond * 60;
 	const msInHour = msInMinute * 60;
-	const minutes = Math.floor((timeDiff % msInHour) / msInMinute).toString();
-	const seconds = Math.floor((timeDiff % msInMinute) / msInSecond).toString();
+	const minutes = Math.floor((gameState.timeDiff % msInHour) / msInMinute).toString();
+	const seconds = Math.floor((gameState.timeDiff % msInMinute) / msInSecond).toString();
 
 	return `${minutes.padStart(2, "0")}:${seconds.padStart(2, "0")}`;
 };

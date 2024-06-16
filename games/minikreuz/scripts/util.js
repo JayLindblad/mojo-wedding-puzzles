@@ -27,7 +27,7 @@ function moveTile(tileNumber, word, direction) {
 	let x = tileNumber % data.puzzle.size.x;
 	let y = Math.floor(tileNumber / data.puzzle.size.y);
 
-	if (selectOrientation == "horizontal") {
+	if (gameState.selectOrientation == "horizontal") {
 		if (direction) {
 			if (x < word.x + word.word.length - 1) {
 				x += 1;
@@ -53,7 +53,7 @@ function moveTile(tileNumber, word, direction) {
 		};
 	};
 
-	previousSelected = tileNumber;
+	gameState.previousSelected = tileNumber;
 	document.getElementById("tileLetter" + tileNumber.toString()).focus();
 };
 
@@ -64,7 +64,7 @@ function moveTextInput(tileNumber, word, n = 0) {
 
 	// Check if word is completely filled
 	let allFilled = true;
-	if (selectOrientation == "horizontal") {
+	if (gameState.selectOrientation == "horizontal") {
 		for (let i = word.x; i < (word.word.length + word.x - 1); i++) {
 			let wordTile = y * data.puzzle.size.y + i;
 			if (document.getElementById("tileLetter" + wordTile.toString()).value == "") {
@@ -82,7 +82,7 @@ function moveTextInput(tileNumber, word, n = 0) {
 		};
 	};
 
-	if (selectOrientation == "horizontal") {
+	if (gameState.selectOrientation == "horizontal") {
 		if (x < word.x + word.word.length - 1) {
 			x += 1;
 		} else if (!allFilled) {
@@ -159,7 +159,7 @@ function checkInputs() {
 };
 
 function focusInput() {
-	document.getElementById("tileLetter" + previousSelected.toString()).focus();
+	document.getElementById("tileLetter" + gameState.previousSelected.toString()).focus();
 };
 
 function highlightWord(word) {
@@ -169,7 +169,7 @@ function highlightWord(word) {
 	});
 	
 	// highlight letters of word
-	if (selectOrientation == "horizontal") {
+	if (gameState.selectOrientation == "horizontal") {
 		for (let x = word.x; x < word.x + word.word.length; x++) {
 			let tileNumber = word.y * data.puzzle.size.y + x;
 			let tile = document.getElementById("tile" + tileNumber.toString());
@@ -190,21 +190,21 @@ function highlightWord(word) {
 function nextWord(word, direction) {
 	let number = word.n;
 
-	for (let w of data.puzzle[selectOrientation].sort((f, s) => { return (f.n - s.n) * (direction ? 1 : -1); })) {
+	for (let w of data.puzzle[gameState.selectOrientation].sort((f, s) => { return (f.n - s.n) * (direction ? 1 : -1); })) {
 		if (direction) {
 			if (w.n > number) {
-				previousSelected = w.x + w.y * data.puzzle.size.y;
+				gameState.previousSelected = w.x + w.y * data.puzzle.size.y;
 				return w;
 			};
 		} else {
 			if (w.n < number) {
-				previousSelected = w.x + w.y * data.puzzle.size.y;
+				gameState.previousSelected = w.x + w.y * data.puzzle.size.y;
 				return w;
 			};
 		};
 	};
 
 	// if the word is already the highest number in it's orientation
-	selectOrientation = selectOrientation == "horizontal" ? "vertical" : "horizontal";
+	gameState.selectOrientation = gameState.selectOrientation == "horizontal" ? "vertical" : "horizontal";
 	return nextWord({n: direction ? 0 : 999}, direction);
 };
