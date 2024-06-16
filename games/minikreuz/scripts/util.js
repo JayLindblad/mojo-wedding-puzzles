@@ -57,7 +57,7 @@ function moveTile(tileNumber, word, direction) {
 	document.getElementById("tileLetter" + tileNumber.toString()).focus();
 };
 
-function moveTextInput(tileNumber, word, n = 0) {
+function moveTextInput(tileNumber, word, n = 0, move = true) {
 	// handle skipping to next input
 	let x = tileNumber % data.puzzle.size.x;
 	let y = Math.floor(tileNumber / data.puzzle.size.y);
@@ -82,7 +82,7 @@ function moveTextInput(tileNumber, word, n = 0) {
 		};
 	};
 
-	if (gameState.selectOrientation == "horizontal") {
+	if (move && gameState.selectOrientation == "horizontal") {
 		if (x < word.x + word.word.length - 1) {
 			x += 1;
 		} else if (!allFilled) {
@@ -91,7 +91,7 @@ function moveTextInput(tileNumber, word, n = 0) {
 			x = word.x;
 		};
 		tileNumber = y * data.puzzle.size.y + x;
-	} else {
+	} else if (move) {
 		if (y < word.y + word.word.length - 1) {
 			y += 1;
 		} else if (!allFilled) {
@@ -103,11 +103,11 @@ function moveTextInput(tileNumber, word, n = 0) {
 	};
 
 	document.getElementById("tileLetter" + tileNumber.toString()).focus();
-	previousSelected = tileNumber;
+	gameState.previousSelected = tileNumber;
 
 	if (!allFilled && document.getElementById("tileLetter" + tileNumber.toString()).value != "" && n < word.word.length) {
 		// check if all squares in word are filled
-		moveTextInput(tileNumber, word, n+1);
+		moveTextInput(tileNumber, word, n+1, true);
 	};
 };
 
@@ -194,11 +194,13 @@ function nextWord(word, direction) {
 		if (direction) {
 			if (w.n > number) {
 				gameState.previousSelected = w.x + w.y * data.puzzle.size.y;
+				moveTextInput(gameState.previousSelected, w, 0, false);
 				return w;
 			};
 		} else {
 			if (w.n < number) {
 				gameState.previousSelected = w.x + w.y * data.puzzle.size.y;
+				moveTextInput(gameState.previousSelected, w, 0, false);
 				return w;
 			};
 		};

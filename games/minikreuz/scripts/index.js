@@ -89,6 +89,7 @@ async function initialisePuzzle() {
 
 	// select first input
 	gameState.previousSelected = data.puzzle.horizontal[0].x + data.puzzle.horizontal[0].y * data.puzzle.size.y;
+	updateLocalStorage("previousSelected", gameState.previousSelected);
 	focusInput();
 
 	// populate letters with stored
