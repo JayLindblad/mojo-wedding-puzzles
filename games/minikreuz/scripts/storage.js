@@ -32,8 +32,8 @@ function clearLetters() {
 
 function loadState() {
 	// Get timer start
-	timeDiff = localStorage.getItem(data.metadata.id + "_diff") == null ? 0 : localStorage.getItem(data.metadata.id + "_diff");
-	ended = localStorage.getItem(data.metadata.id + "_ended") == null ? ended : localStorage.getItem(data.metadata.id + "_ended");
+	timeDiff = window.localStorage.getItem(data.metadata.id + "_diff") == null ? 0 : localStorage.getItem(data.metadata.id + "_diff");
+	ended = window.localStorage.getItem(data.metadata.id + "_ended") == null ? ended : JSON.parse(localStorage.getItem(data.metadata.id + "_ended");
 	
 	if (ended == true) {
 		gameEnd(false);
@@ -42,8 +42,8 @@ function loadState() {
 
 function resetState() {
 	timeDiff = 0;
-	localStorage.setItem(data.metadata.id + "_diff", timeDiff);
+	window.localStorage.setItem(data.metadata.id + "_diff", timeDiff);
 	
-	localStorage.setItem(data.metadata.id + "_ended", ended);
-	localStorage.remove(data.metadata.id);
+	window.localStorage.setItem(data.metadata.id + "_ended", ended);
+	window.localStorage.removeItem(data.metadata.id);
 }

@@ -101,9 +101,11 @@ async function initialisePuzzle() {
 	
 	// Create timer
 	window.setInterval(() => {
-		timeDiff = parseInt(timeDiff) + 1000;
-		localStorage.setItem(data.metadata.id + "_diff", timeDiff);
-		document.getElementById("timer").innerHTML = "Timer: " + getResults();
+		if (!ended) {
+			timeDiff = parseInt(timeDiff) + 1000;
+			localStorage.setItem(data.metadata.id + "_diff", timeDiff);
+			document.getElementById("timer").innerHTML = "Timer: " + getResults();
+		};
 	}, 1000);
 };
 

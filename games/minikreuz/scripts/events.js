@@ -36,6 +36,8 @@ function reset() {
 		ended = false;
 		success = true;
 		mistakes = 0;
+
+		document.getElementById("showresults").remove();
 	};
 };
 
