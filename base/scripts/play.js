@@ -70,8 +70,8 @@ function puzzleEndEvent(id, metrics) {
 			"project": "verbindungen",
 			"channel": "puzzles",
 			"event": "finished",
-			"description": stats.success ? "A user solved a puzzle." : "A user failed a puzzle.",
-			"icon": stats.success ? "✅" : "❌",
+			"description": stats.metrics.success ? "A user solved a puzzle." : "A user failed a puzzle.",
+			"icon": stats.metrics.success ? "✅" : "❌",
 			"notify": true,
 			"tags": {
 				"game": game,
