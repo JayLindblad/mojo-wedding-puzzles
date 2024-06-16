@@ -13,11 +13,12 @@ function onKeyPress(e) {
 
 	let tileNumber = e.target.attributes.tilenumber.value;
 	let word = getWord(tileNumber, gameState.selectOrientation);
+	let alreadyFilled = document.getElementById("tileLetter" + tileNumber.toString()).value != "";
 
 	// Set input value to key
 	e.target.value = e.key;
 
-	moveTextInput(tileNumber, word);
+	moveTextInput(tileNumber, word, 0, true, alreadyFilled);
 
 	// save to localstorage
 	saveLetters();

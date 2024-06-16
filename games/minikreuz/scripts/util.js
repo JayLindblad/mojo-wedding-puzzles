@@ -57,7 +57,7 @@ function moveTile(tileNumber, word, direction) {
 	document.getElementById("tileLetter" + tileNumber.toString()).focus();
 };
 
-function moveTextInput(tileNumber, word, n = 0, move = true) {
+function moveTextInput(tileNumber, word, n = 0, move = true, alreadyFilled = true) {
 	// handle skipping to next input
 	let x = tileNumber % data.puzzle.size.x;
 	let y = Math.floor(tileNumber / data.puzzle.size.y);
@@ -65,15 +65,15 @@ function moveTextInput(tileNumber, word, n = 0, move = true) {
 	// Check if word is completely filled
 	let allFilled = true;
 	if (gameState.selectOrientation == "horizontal") {
-		for (let i = word.x; i < (word.word.length + word.x - 1); i++) {
+		for (let i = word.x; i < (word.word.length + word.x); i++) {
 			let wordTile = y * data.puzzle.size.y + i;
 			if (document.getElementById("tileLetter" + wordTile.toString()).value == "") {
 				allFilled = false;
 				break;
 			};
 		};
-	} else {		
-		for (let i = word.y; i < (word.word.length + word.y - 1); i++) {
+	} else {
+		for (let i = word.y; i < (word.word.length + word.y); i++) {
 			let wordTile = i * data.puzzle.size.y + x;
 			if (document.getElementById("tileLetter" + wordTile.toString()).value == "") {
 				allFilled = false;
@@ -89,6 +89,7 @@ function moveTextInput(tileNumber, word, n = 0, move = true) {
 			// if the word is not completely filled
 			// skip back to beginning and go to non-filled tile
 			x = word.x;
+			alreadyFilled = false;
 		};
 		tileNumber = y * data.puzzle.size.y + x;
 	} else if (move) {
@@ -98,6 +99,7 @@ function moveTextInput(tileNumber, word, n = 0, move = true) {
 			// if the word is not completely filled
 			// skip back to beginning and go to non-filled tile
 			y = word.y;
+			alreadyFilled = false;
 		};
 		tileNumber = y * data.puzzle.size.y + x;
 	};
@@ -105,9 +107,14 @@ function moveTextInput(tileNumber, word, n = 0, move = true) {
 	document.getElementById("tileLetter" + tileNumber.toString()).focus();
 	gameState.previousSelected = tileNumber;
 
-	if (!allFilled && document.getElementById("tileLetter" + tileNumber.toString()).value != "" && n < word.word.length) {
-		// check if all squares in word are filled
-		moveTextInput(tileNumber, word, n+1, true);
+	console.log(alreadyFilled, allFilled);
+	if (
+		!alreadyFilled && 
+		document.getElementById("tileLetter" + tileNumber.toString()).value != "" &&
+		n < data.puzzle.size.x && 
+		!allFilled
+	) {
+		moveTextInput(tileNumber, word, n+1, true, false);
 	};
 };
 
@@ -194,13 +201,13 @@ function nextWord(word, direction) {
 		if (direction) {
 			if (w.n > number) {
 				gameState.previousSelected = w.x + w.y * data.puzzle.size.y;
-				moveTextInput(gameState.previousSelected, w, 0, false);
+				moveTextInput(gameState.previousSelected, w, 0, false, false);
 				return w;
 			};
 		} else {
 			if (w.n < number) {
 				gameState.previousSelected = w.x + w.y * data.puzzle.size.y;
-				moveTextInput(gameState.previousSelected, w, 0, false);
+				moveTextInput(gameState.previousSelected, w, 0, false, false);
 				return w;
 			};
 		};
