@@ -74,7 +74,7 @@ async function submitCategory() {
 		};
 
 		mistakes++;
-		setupMistakes();
+		initialiseMistakes();
 
 		// show animation
 		let s = document.getElementsByClassName("selected");
@@ -141,5 +141,5 @@ function gameEnd(success) {
 		setup();
 	};
 
-	puzzleEndEvent(metadata.id, success, mistakes, history_dict);
+	puzzleEndEvent(metadata.id, { success, mistakes, history_dict });
 };

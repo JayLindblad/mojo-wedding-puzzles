@@ -41,7 +41,7 @@ function reset() {
 
 function gameEnd(log) {
 	if (log) {
-		puzzleEndEvent(data.metadata.id, success, mistakes, timeDiff);
+		puzzleEndEvent(data.metadata.id, { success, mistakes, time: timeDiff });
 		ended = true;
 		localStorage.setItem(data.metadata.id + "_ended", ended);
 	};

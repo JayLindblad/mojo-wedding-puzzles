@@ -52,15 +52,13 @@ async function puzzleLoadEvent() {
 	return puzzleData;
 };
 
-function puzzleEndEvent(id, success, mistakes, history) {
+function puzzleEndEvent(id, metrics) {
 	let stats = {
 		id: id,
 		userId: userId,
 		timestamp: Date.now(),
 		game: game,
-		success: success,
-		mistakes: mistakes,
-		history: history
+		metrics: metrics
 	};
 
 	try {	
@@ -77,9 +75,7 @@ function puzzleEndEvent(id, success, mistakes, history) {
 			"notify": true,
 			"tags": {
 				"game": game,
-				"id": stats.id,
-				"success": stats.success,
-				"mistakes": stats.mistakes
+				"id": stats.id
 			}
 		};
 		fetch("https://api.logsnag.com/v1/log", {
