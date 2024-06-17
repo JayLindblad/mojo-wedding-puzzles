@@ -1,6 +1,6 @@
 function backwards(game) {
 	// Get next document
-	db.collection(game).where("metadata.timestamp", "<", metadata.timestamp)
+	db.collection(game).where("metadata.timestamp", "<", data.metadata.timestamp)
 	.orderBy("metadata.timestamp", "desc")
 	.limit(1)
 	.get()
@@ -27,7 +27,7 @@ function backwards(game) {
 
 function forwards(game) {
 	// Get next document
-	db.collection(game).where("metadata.timestamp", ">", metadata.timestamp)
+	db.collection(game).where("metadata.timestamp", ">", data.metadata.timestamp)
 	.orderBy("metadata.timestamp")
 	.limit(1)
 	.get()
