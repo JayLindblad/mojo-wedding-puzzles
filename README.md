@@ -6,7 +6,7 @@
 
 Try it out at [spiele.obrhubr.org](spiele.obrhubr.org).
 
-This site offers two puzzle games published by the New York Times, but in german, [Connections](https://www.nytimes.com/games/connections) and their [Mini-Crossword](https://www.nytimes.com/crosswords/game/mini).
+This site offers two puzzle games published by the New York Times, but in German, [Connections](https://www.nytimes.com/games/connections) and their [Mini-Crossword](https://www.nytimes.com/crosswords/game/mini).
 The goal was to recreate the games as simply as possible, in pure html, css and javascript (without the help of a framework). This allowed me to build first versions of Connections in about 24h.
 
 ## Creating a DIY Framework
