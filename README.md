@@ -1,45 +1,57 @@
-the basic site provides:
- - the database functionality
-	- loads the json that is the current game
-	- adding and managing games
-	- navigating between games
-	- basic js and css for styling the navbar etc...
-	- compilation to _site
-	- how to play button that loads from the game
-	- results modal that pops up
+<p align="center">
+	<img alt="Logo" src=".github/icon.png" data-canonical-src=".github/icon.png" width="200"/>
+</p>
 
-	- index.html as a welcome page for the site, showing all the games that are accessible
+# Modular-Games: a NYT Games Clone
 
-every game supports:
- - end event (gives back errors / stats -> shared end function that logs to logsnag/firebase + results function that gets the results)
- - add event (adding a game in json format -> shared add function that sends to appropriate firebase db)
+Try it out at [spiele.obrhubr.org](spiele.obrhubr.org).
 
- - index.html (play the actual game)
- - add.html (adding a new game)
-	 - custom css/js for the game
- - how.html
+This site offers two puzzle games published by the New York Times, but in german, [Connections](https://www.nytimes.com/games/connections) and their [Mini-Crossword](https://www.nytimes.com/crosswords/game/mini).
+The goal was to recreate the games as simply as possible, in pure html, css and javascript (without the help of a framework). This allowed me to build first versions of Connections in about 24h.
 
-site:
- - index.html (fetches all game types from firebase)
- - games/
-	- {{ game.name }}
-		- play.html
-		- add.html
-		- how.html
-		- results.html
-		- metadata.json
- - layouts/
-	- play.html/?game_id=xxx&number=yyy
-	- add.html/?game_id=xxx
-	- all.html/?game_id=xxx
+## Creating a DIY Framework
 
-compiler:
- - creates _site
-	 - copies index.html to the _site folder and create a button for each game with description and little icon
-	 - copy styles and scripts to assets folder in site
-	 - composites the head and navbar for each page
+Because the puzzle games need a lot of the similar functionality (a page to see all puzzles, navigating between the puzzles, loading the current puzzle from the database, etc...) I wanted to keep the amount of duplicated code to a minimum. This naturally lead me to consider building each game as a sort of plug-and-play html code that operated in isolation from the rest of the site's functionality.
 
- - goes through each folder in the games/ directory
-	 - creates the index, add pages with the how and results composited in (from default layout)
-	 - adds the metadata to the pages head
-	 - copies js and css to assets folder
+This means that each game (found in the `./games` folders) has to have a `play.html` page (which is the game itself). This page calls `puzzleLoadEvent()` on load, which is a shared function that returns the `json` that corresponds to the current puzzle. This abstracts away any db interactions from the game's logic. Once the game has finished `puzzleEndEvent()` is called, which logs results automatically and handles showing the results.
+
+Each game also provides an `add.html` page which handles adding game and similarly interfaces with shared functions instead of the db directly.
+
+But to make this possible I somehow had to composite the different html pages together. I was inspired by the way Jekyll, the framework I use for my blog, works. Each page specifies a layout that should be used to render the page. You can then use `{{ variable }}` tags, that get replaced dynamically by the variable on rendering.
+
+I implemented a very simple solution that works essentially the same way in `compile.py`, using regex. It first renders the basic pages for the site and then loops through every folder in `./games` and adds the games to the site. You can use `{{ variable }}` as with Jekyll, but I also provide `{% path/to/html %}` tags to dynamically load html sites. These get replaced by the html in the file. You can also use `{* if (condition) *} ... {* ifend *}` tags to load html based on conditions dynamically. This allows me to customise what gets shown in the navigation bar on the homepage and while playing a game for example.
+
+## Hosting the site
+
+The original site was hosted on Github Pages, but I wanted to add the possibility for my friends to add puzzles too, so I switched to Firebase.
+
+Using Firebase allowed me to add a few very important features. First is the loading of puzzles from a database (specified by an ID encoded in the URL parameter, allowing simple navigation) and of course the possibility of creating and uploading a new puzzle directly from a webpage.
+
+## The site
+
+The title bar shows the ID of the current puzzle and also the date of creation. This allows users to easily share the puzzle with others, through URL parameters: `spiele.obrhubr.org/verbindungen/play.html?number=K161sMaSf8UE60hcTh45` links to that puzzle directly.
+It is also possible to navigate between the puzzles in chronological order with the arrow buttons. They call the Firestore API to fetch the puzzle id and reload the page with the correct URL parameter.
+
+After the user has completed the puzzle, a popup appears with the results. It shows the steps the user took to solve it and a button that allows him to copy this short message, enabling him to share his game with friends.
+
+```
+Verbindungen Puzzle: K161sMaSf8UE60hcTh45
+🟩🟨🟨🟪
+🟩🟨🟩🟩
+🟩🟩🟩🟩
+🟦🟦🟨🟦
+🟦🟦🟦🟪
+🟪🟨🟪🟪
+spiele.obrhubr.org/verbindungen/play.html?number=K161sMaSf8UE60hcTh45
+```
+
+### Screenshots from the site
+
+<p align="center">
+	<img alt="Logo" src=".github/home.png" data-canonical-src=".github/home.png" width="300"/>
+	<img alt="Logo" src=".github/navigation.png" data-canonical-src=".github/navigation.png" width="300"/>
+	<img alt="Logo" src=".github/connections.png" data-canonical-src=".github/connections.png" width="300"/>
+	<img alt="Logo" src=".github/minicrossword.png" data-canonical-src=".github/minicrossword.png" width="300"/>
+	<img alt="Logo" src=".github/all.png" data-canonical-src=".github/all.png" width="300"/>
+	<img alt="Logo" src=".github/add.png" data-canonical-src=".github/add.png" width="300"/>
+</p>
