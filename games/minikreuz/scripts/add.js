@@ -87,6 +87,10 @@ function createGrid() {
 	};
 }
 
+function focusInput() {
+	document.getElementById("tileLetter" + previousSelected.toString()).focus();
+};
+
 function onTileClick(e) {
 	document.getElementById("keyboard").style.display = "flex";
 
