@@ -18,7 +18,7 @@ play: true
 	<div id="instructions" class="popup instructions-popup">
 		<div class="close" onclick="closePopup('instructions');">X</div>
 			
-		{! how.html !}
+		{% ./games/{{ slug }}/how.html %}
 	</div>
 	
 	<div id="results" class="results popup">
@@ -27,7 +27,7 @@ play: true
 			<h2>Dein Ergebnis</h2>
 		</div>
 		<div id="results-inner" class="results-inner">
-			{! results.html !}
+			{% ./games/{{ slug }}/results.html %}
 		</div>
 		<div class="copy button" id="copy" onclick="copyResults()">Teile dein Ergebnis!</div>
 	</div>

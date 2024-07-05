@@ -36,7 +36,7 @@ def extract_metadata(page):
 	else:
 		return None, None
 
-def replace_file_tags(html):
+def replace_file_tags(html, prefix=""):
 	logger.debug(f"Replacing file tags")
 
 	file_tag_pattern = r'{%\s*(\S+)\s*%}'
@@ -45,6 +45,7 @@ def replace_file_tags(html):
 		match = re.search(file_tag_pattern, html)
 		if match:
 			filename = match.group(1)
+			
 			if os.path.exists(filename):
 				with open(filename, "r", encoding="utf-8") as file:
 					file_content = file.read()
@@ -52,52 +53,6 @@ def replace_file_tags(html):
 			else:
 				html = html.replace(match.group(0), f'<!-- File {filename} not found -->')
 				
-	return html
-
-def replace_game_tags(folder, html):
-	logger.debug(f"Replacing game tags")
-	
-	file_tag_pattern = r'{!\s*(\S+)\s*!}'
-	
-	while re.search(file_tag_pattern, html):
-		match = re.search(file_tag_pattern, html)
-		if match:
-			filename = match.group(1)
-			with open(os.path.join(GAMES, folder, filename), "r", encoding="utf-8") as file:
-				file_content = file.read()
-			html = html.replace(match.group(0), "\n" + file_content + "\n")
-
-	return html
-
-def replace_if_tags(html, metadata):
-	logger.debug(f"Replacing if tags")
-
-	ifs = r'\{\*\s*if\s*\(([^)]*)\)\s*\*\}([\s\S]*?)\{\*\s*ifend\s*\*\}'
-
-	while re.search(ifs, html):
-		match = re.search(ifs, html)
-		if_condition = match.group(1)
-
-		if_content = match.group(2)
-		whole = match.string[match.start():match.end()]
-
-		statement = ""
-		for if_c in if_condition.split("&&"):
-			if_c = if_c.strip()
-			if if_c[0] == "!":
-				statement += f"not '{if_c[1:]}' in globals()"
-			else:
-				statement += f"'{if_c}' in globals()"
-			
-			statement += " and "
-		
-		statement = statement[:-5]
-
-		if eval(statement, metadata) == True:
-			html = html.replace(whole, if_content)
-		else:
-			html = html.replace(whole, "")
-
 	return html
 
 def replace_games(layout):
@@ -142,6 +97,37 @@ def replace_games(layout):
 
 	return layout
 
+def replace_if_tags(html, metadata):
+	logger.debug(f"Replacing if tags")
+
+	ifs = r'\{\*\s*if\s*\(([^)]*)\)\s*\*\}([\s\S]*?)\{\*\s*ifend\s*\*\}'
+
+	while re.search(ifs, html):
+		match = re.search(ifs, html)
+		if_condition = match.group(1)
+
+		if_content = match.group(2)
+		whole = match.string[match.start():match.end()]
+
+		statement = ""
+		for if_c in if_condition.split("&&"):
+			if_c = if_c.strip()
+			if if_c[0] == "!":
+				statement += f"not '{if_c[1:]}' in globals()"
+			else:
+				statement += f"'{if_c}' in globals()"
+			
+			statement += " and "
+		
+		statement = statement[:-5]
+
+		if eval(statement, metadata) == True:
+			html = html.replace(whole, if_content)
+		else:
+			html = html.replace(whole, "")
+
+	return html
+
 def apply_template(page, extra_metadata={}):
 	logger.debug("Applying template to page")
 
@@ -156,15 +142,15 @@ def apply_template(page, extra_metadata={}):
 		# Apply template to the layout if it has metadata
 		layout = apply_template(layout)
 
-	# replace {% content %} by the page 
+	# replace {- content -} by the page 
 	layout = layout.replace("{- content -}", "\n" + html + "\n")
+
+	# replace layout vars by metadata
+	for key, value in metadata.items():
+		layout = layout.replace('{{ ' + key + ' }}', value)
 
 	# replace {% xxx %} by the pages in the layout
 	layout = replace_file_tags(layout)
-
-	# replace {! xxx !} by the game's files
-	if "slug" in extra_metadata:
-		layout = replace_game_tags(extra_metadata["slug"], layout)
 
 	# replace {% xxx %} by the pages on the base page
 	layout = replace_file_tags(layout)
