@@ -28,19 +28,19 @@ function onTileClick(e) {
 };
 
 function reset() {
+	// Remove results if the game has ended
 	if (gameState.ended) {
-		// Reset global vars
-		gameState.timeDiff = 0;
-		gameState.ended = false;
-
-		success = true;
-		mistakes = 0;
-
 		document.getElementById("showresults").remove();
 	};
-	
+
+	// Remove timer from body
+	window.clearInterval(gameState.intervalId);
+
 	clearLetters();
 	resetState();
+
+	// Reset timer immediately
+	document.getElementById("timer").innerHTML = "Timer: " + getResults();
 };
 
 function gameEnd(log) {

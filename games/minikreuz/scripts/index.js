@@ -8,7 +8,8 @@ let gameState = {
 	showedComplete: false,
 	previousSelected: -1,
 	selectOrientation: "horizontal",
-	letters: {}
+	letters: {},
+	intervalId: ""
 };
 
 function initialiseGrid() {

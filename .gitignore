@@ -2,3 +2,4 @@ _site
 .env
 .firebase
 compiler/__pycache__
+compiler/parsers/__pycache__
