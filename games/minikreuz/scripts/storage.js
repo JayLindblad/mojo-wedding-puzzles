@@ -53,6 +53,15 @@ function clearLetters() {
 };
 
 function resetState() {
+	gameState = {
+		ended: false,
+		timeDiff: 0,
+		showedComplete: false,
+		previousSelected: -1,
+		selectOrientation: "horizontal",
+		letters: {}
+	};
+	
 	window.localStorage.setItem(data.metadata.id, JSON.stringify({
 		ended: false,
 		timeDiff: 0,
