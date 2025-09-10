@@ -25,7 +25,7 @@ function addPuzzle() {
 
 		// Log to logsnag
 		let data = {
-			"project": "verbindungen",
+			"project": "connections",
 			"channel": "puzzles",
 			"event": "add",
 			"description": "A user added a puzzle to the site.",
