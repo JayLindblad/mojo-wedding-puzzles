@@ -29,12 +29,12 @@
 				<div id="nav" class="navigate-container">
 					<div>
 						<span onclick="backwards('{{ slug }}')" class="navigate" id="backwards">⬅️</span>
-						<span class="navigate" id="overview"><a href="./all.html">Alle Puzzle</a></span>
+						<span class="navigate" id="overview"><a href="./all.html">All Puzzles</a></span>
 						<span onclick="forwards('{{ slug }}')" class="navigate" id="forwards">➡️</span>
 					</div>
 	
 					<div>
-						<button class="button" onclick="showPopup('instructions')" class="instructions" id="">Wie spielt man?</button>
+						<button class="button" onclick="showPopup('instructions')" class="instructions" id="">How to play?</button>
 					</div>
 				</div>
 			{* ifend *}
@@ -44,17 +44,17 @@
 <div id="nav-menu" class="nav-menu to-blur">
 	<div class="side-list">
 		<div class="side-list-title side-list-item">
-			<a href="/">Die deutschen Rätsel</a>
+			<a href="/">Mojo's Puzzles</a>
 		</div>
 		{# games-small #}
 		<div class="side-list-item">
-			<a href="/">Alle Rätsel</a>
+			<a href="/">All Puzzles</a>
 		</div>
 		<div class="side-list-item side-game-specific">
 			{* if (play && !home) *}
 				<div>
 					<b>
-						Das Rätsel wurde hochgeladen am:
+						This puzzle was uploaded on:
 					</b>
 					<span class="date" id="date"></span>
 					<span class="author" id="author"></span>
@@ -63,8 +63,8 @@
 			{* if (!home) *}
 				<div>
 					<div class="navigate-container">
-						<span class="navigate" id="overview"><a href="./all.html">Alle Puzzle</a></span>
-						<span class="navigate" id="overview"><a href="./add.html">Puzzle hinzufügen</a></span>
+						<span class="navigate" id="overview"><a href="./all.html">All Puzzles</a></span>
+						<span class="navigate" id="overview"><a href="./add.html">Add Puzzle</a></span>
 						<button onclick="showLoginAlert();" class="button">Login</button>
 					</div>
 				</div>
