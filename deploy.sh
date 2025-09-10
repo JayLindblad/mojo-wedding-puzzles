@@ -2,4 +2,4 @@
 python3 ./compiler/compile.py
 
 # execute the hosting command
-firebase deploy
+wrangler deploy
