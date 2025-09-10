@@ -62,9 +62,10 @@ def create_site():
 	)
 
 	# add the keys to the db.js script
-	keys = read_page("./.env")
-	script = read_page(os.path.join(SITE, ASSETS, SCRIPTS, "db.js"))
-	write_page(keys + "\n" + script, os.path.join(SITE, ASSETS, SCRIPTS, "db.js"))
+	# keys = read_page("./.env")
+	# script = read_page(os.path.join(SITE, ASSETS, SCRIPTS, "db.js"))
+	# write_page(keys + "\n" + script, os.path.join(SITE, ASSETS, SCRIPTS, "db.js"))
+	logger.info("Skipping Firebase configuration - not using Firebase")
 
 def create_game(folder):
 	logger.info(f"Creating files for game: {folder}")
