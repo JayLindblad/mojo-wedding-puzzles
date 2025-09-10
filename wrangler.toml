@@ -1,9 +1,17 @@
 # wrangler.toml (wrangler v3.88.0^)
-[observability.logs]
-enabled = true
 
 name = "mojo-wedding-puzzles"
 compatibility_date = "2025-09-10"
+main = "./base/index.html"
+
+
 
 [assets]
 directory = "./base"
+binding = "ASSETS"
+
+
+# Extras
+
+[observability.logs]
+enabled = true
