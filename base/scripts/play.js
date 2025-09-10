@@ -67,7 +67,7 @@ function puzzleEndEvent(id, metrics) {
 	
 		// Log to logsnag
 		let data = {
-			"project": "verbindungen",
+			"project": "connections",
 			"channel": "puzzles",
 			"event": "finished",
 			"description": stats.metrics.success ? "A user solved a puzzle." : "A user failed a puzzle.",
